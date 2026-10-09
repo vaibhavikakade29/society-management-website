@@ -1,0 +1,286 @@
+<div class="visitor-container">
+
+    <!-- ========================================= -->
+    <!-- Page Header -->
+    <!-- ========================================= -->
+
+    <div class="page-header">
+
+        <h2>Visitor Management</h2>
+
+        <p>
+            Manage visitor requests, approvals, entries and exits.
+        </p>
+
+    </div>
+
+    <!-- ========================================= -->
+    <!-- Error Message -->
+    <!-- ========================================= -->
+
+    <div
+        class="alert error"
+        *ngIf="errorMessage">
+
+        {{ errorMessage }}
+
+    </div>
+
+    <!-- ========================================= -->
+    <!-- Search & Filter -->
+    <!-- ========================================= -->
+
+    <div class="card">
+
+        <div class="filter-container">
+
+            <div class="search-box">
+
+                <label>Search Visitor</label>
+
+                <input
+                    type="text"
+                    placeholder="Search by visitor, purpose or flat..."
+                    [(ngModel)]="searchText"
+                    (input)="filterVisitors()">
+
+            </div>
+
+            <div class="status-filter">
+
+                <label>Status</label>
+
+                <select
+                    [(ngModel)]="selectedStatus"
+                    (change)="filterVisitors()">
+
+                    <option value="All">All</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Approved">Approved</option>
+                    <option value="Rejected">Rejected</option>
+                    <option value="Entered">Entered</option>
+                    <option value="Exited">Exited</option>
+                    <option value="Cancelled">Cancelled</option>
+
+                </select>
+
+            </div>
+
+            <div class="refresh-btn">
+
+                <button
+                    type="button"
+                    (click)="loadVisitors()">
+
+                    Refresh
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ========================================= -->
+    <!-- Loading -->
+    <!-- ========================================= -->
+
+    <div
+        class="loading"
+        *ngIf="isLoading">
+
+        Loading visitor requests...
+
+    </div>
+
+    <!-- ========================================= -->
+    <!-- Empty State -->
+    <!-- ========================================= -->
+
+    <div
+        class="empty"
+        *ngIf="!isLoading && filteredVisitors.length===0">
+
+        No visitor requests found.
+
+    </div>
+
+    <!-- ========================================= -->
+    <!-- Visitor Table -->
+    <!-- ========================================= -->
+
+    <div
+        class="card"
+        *ngIf="!isLoading && filteredVisitors.length>0">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Visitor Name <br>Mobile No.</th>
+
+                    <th>Resident Name</th>
+
+                    <th>Resident Flat No.</th>
+
+                    <th>Purpose to visit</th>
+
+                    <th>Date</th>
+
+                    <th>Time</th>
+
+                    <th>Status</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr *ngFor="let visitor of filteredVisitors">
+
+                    <!-- Visitor -->
+
+                    <td>
+
+                        <strong>{{ visitor.visitorName }}</strong>
+
+                        <br>
+
+                        <small>{{ visitor.mobile }}</small>
+
+                    </td>
+
+                    <!-- Resident -->
+
+                    <td>
+
+                        {{ visitor.resident?.fullName }}
+
+                    </td>
+
+                    <!-- Flat -->
+
+                    <td>
+
+                        {{ visitor.resident?.wing }}
+
+                        -
+
+                        {{ visitor.resident?.flatNo }}
+
+                    </td>
+
+                    <!-- Purpose -->
+
+                    <td>
+
+                        {{ visitor.purpose }}
+
+                    </td>
+
+                    <!-- Date -->
+
+                    <td>
+
+                        {{ visitor.visitDate | date:'dd/MM/yyyy' }}
+
+                    </td>
+
+                    <!-- Time -->
+
+                    <td>
+
+                        {{ visitor.expectedTime }}
+
+                    </td>
+
+                    <!-- Status -->
+
+                    <td>
+
+                        <span
+                            class="badge"
+                            [ngClass]="getStatusClass(visitor.status)">
+
+                            {{ visitor.status }}
+
+                        </span>
+
+                    </td>
+
+                    <!-- Actions -->
+
+                    <td>
+
+                        <!-- Pending -->
+
+                        <ng-container *ngIf="visitor.status==='Pending'">
+
+                            <button
+                                class="approve-btn"
+                                (click)="approveVisitor(visitor._id)">
+
+                                Approve
+
+                            </button>
+
+                            <button
+                                class="reject-btn"
+                                (click)="rejectVisitor(visitor._id)">
+
+                                Reject
+
+                            </button>
+
+                        </ng-container>
+
+                        <!-- Approved -->
+
+                        <button
+                            *ngIf="visitor.status==='Approved'"
+                            class="entry-btn"
+                            (click)="markEntry(visitor._id)">
+
+                            Mark Entry
+
+                        </button>
+
+                        <!-- Entered -->
+
+                        <button
+                            *ngIf="visitor.status==='Entered'"
+                            class="exit-btn"
+                            (click)="markExit(visitor._id)">
+
+                            Mark Exit
+
+                        </button>
+
+                        <!-- Other Status -->
+
+                        <span
+                            *ngIf="visitor.status==='Rejected'
+                            || visitor.status==='Exited'
+                            || visitor.status==='Cancelled'">
+
+                            -
+
+                        </span>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>

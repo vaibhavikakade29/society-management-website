@@ -1,0 +1,119 @@
+<div class="page">
+
+  <h2>
+    📢 Society Notices
+  </h2>
+
+  <div class="stat-card">
+
+    <h3>
+      {{ totalNotices }}
+    </h3>
+
+    <p>
+      Available Notices
+    </p>
+
+  </div>
+
+  <div class="search-box">
+
+    <input
+      type="text"
+      placeholder="Search Notice"
+      [(ngModel)]="searchText"
+      (input)="searchNotice()">
+
+  </div>
+
+  <div class="notice-list">
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>Title</th>
+          <th>Type</th>
+          <th>Expiry Date</th>
+          <th>Action</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <tr
+          *ngFor="let notice of filteredNotices">
+
+          <td>{{ notice.title }}</td>
+
+          <td>{{ notice.noticeType }}</td>
+
+          <td>{{ notice.expiryDate }}</td>
+
+          <td>
+
+            <button
+              class="view-btn"
+              (click)="viewNotice(notice)">
+
+              View
+
+            </button>
+
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
+
+<div
+  class="modal"
+  *ngIf="selectedNotice">
+
+  <div class="modal-content">
+
+    <h2>
+      📢 Notice Details
+    </h2>
+
+    <p>
+      <strong>Title:</strong>
+      {{ selectedNotice.title }}
+    </p>
+
+    <p>
+      <strong>Description:</strong>
+      {{ selectedNotice.description }}
+    </p>
+
+    <p>
+      <strong>Type:</strong>
+      {{ selectedNotice.noticeType }}
+    </p>
+
+    <p>
+      <strong>Expiry:</strong>
+      {{ selectedNotice.expiryDate }}
+    </p>
+
+    <button
+      class="close-btn"
+      (click)="closeNotice()">
+
+      Close
+
+    </button>
+
+  </div>
+
+</div>

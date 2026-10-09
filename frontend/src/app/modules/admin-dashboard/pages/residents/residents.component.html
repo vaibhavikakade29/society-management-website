@@ -1,0 +1,254 @@
+<div class="page">
+
+  <h2>👥 Residents Management</h2>
+
+  <!-- Statistics -->
+
+  <div class="stats-grid">
+
+    <div class="card">
+      <h3>Total Residents</h3>
+      <p>{{ totalResidents }}</p>
+    </div>
+
+    <div class="card">
+      <h3>Approved</h3>
+      <p>{{ approvedResidents }}</p>
+    </div>
+
+    <div class="card">
+      <h3>Pending</h3>
+      <p>{{ pendingResidents }}</p>
+    </div>
+
+    <div class="card">
+      <h3>Owners</h3>
+      <p>{{ ownersCount }}</p>
+    </div>
+
+    <div class="card">
+      <h3>Tenants</h3>
+      <p>{{ tenantsCount }}</p>
+    </div>
+
+  </div>
+
+  <!-- Filters -->
+
+  <div class="filters">
+
+    <input
+      type="text"
+      placeholder="Search Resident..."
+      [(ngModel)]="searchText"
+      (input)="applyFilters()">
+
+    <select
+      [(ngModel)]="selectedWing"
+      (change)="applyFilters()">
+
+      <option value="">All Wings</option>
+      <option>A</option>
+      <option>B</option>
+      <option>C</option>
+      <option>D</option>
+      <option>E</option>
+      <option>F</option>
+      <option>G</option>
+
+    </select>
+
+    <select
+      [(ngModel)]="selectedStatus"
+      (change)="applyFilters()">
+
+      <option value="">All Status</option>
+
+      <option value="approved">
+        Approved
+      </option>
+
+      <option value="pending">
+        Pending
+      </option>
+
+      <option value="rejected">
+        Rejected
+      </option>
+
+    </select>
+
+    <select
+      [(ngModel)]="selectedUserType"
+      (change)="applyFilters()">
+
+      <option value="">All Types</option>
+
+      <option value="owner">
+        Owner
+      </option>
+
+      <option value="tenant">
+        Tenant
+      </option>
+
+    </select>
+
+  </div>
+
+  <!-- Table -->
+
+  <table>
+
+    <thead>
+
+      <tr>
+
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Flat No</th>
+        <th>User Type</th>
+        <th>Status</th>
+        <th>Actions</th>
+
+      </tr>
+
+    </thead>
+
+    <tbody>
+
+      <tr *ngFor="let user of filteredResidents">
+
+        <td>{{ user.fullName }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.phone }}</td>
+        <td>{{ user.flatNo }}</td>
+        <td>{{ user.userType }}</td>
+
+        <td>
+
+          <span
+            class="status"
+            [ngClass]="user.status">
+
+            {{ user.status }}
+
+          </span>
+
+        </td>
+
+       <td>
+
+  <button
+    class="view-btn"
+    (click)="viewResident(user)">
+
+    View
+
+  </button>
+
+  <button
+    *ngIf="user.status === 'pending'"
+    class="approve-btn"
+    (click)="approveUser(user._id)">
+
+    Approve
+
+  </button>
+
+  <button
+    *ngIf="user.status === 'pending'"
+    class="reject-btn"
+    (click)="rejectUser(user._id)">
+
+    Reject
+
+  </button>
+
+  <span
+    *ngIf="user.status === 'approved'"
+    style="color:green;font-weight:bold;">
+
+    ✔ Approved
+
+  </span>
+
+  <span
+    *ngIf="user.status === 'rejected'"
+    style="color:red;font-weight:bold;">
+
+    ✖ Rejected
+
+  </span>
+
+</td>
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>
+
+<!-- Resident Details Modal -->
+
+<div
+  class="modal"
+  *ngIf="selectedResident">
+
+  <div class="modal-content">
+
+    <h3>Resident Details</h3>
+
+    <p>
+      <strong>Name:</strong>
+      {{ selectedResident.fullName }}
+    </p>
+
+    <p>
+      <strong>Email:</strong>
+      {{ selectedResident.email }}
+    </p>
+
+    <p>
+      <strong>Phone:</strong>
+      {{ selectedResident.phone }}
+    </p>
+
+    <p>
+      <strong>Wing:</strong>
+      {{ selectedResident.wing }}
+    </p>
+
+    <p>
+      <strong>Flat:</strong>
+      {{ selectedResident.flatNo }}
+    </p>
+
+    <p>
+      <strong>User Type:</strong>
+      {{ selectedResident.userType }}
+    </p>
+
+    <p>
+      <strong>Committee Role:</strong>
+      {{ selectedResident.committeeRole }}
+    </p>
+
+    <p>
+      <strong>Status:</strong>
+      {{ selectedResident.status }}
+    </p>
+
+    <button
+      class="close-btn"
+      (click)="closeDetails()">
+
+      Close
+
+    </button>
+
+  </div>
+
+</div>

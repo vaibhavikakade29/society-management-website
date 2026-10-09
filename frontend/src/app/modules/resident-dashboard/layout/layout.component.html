@@ -1,0 +1,367 @@
+<!-- ==========================================================
+     RESIDENT LAYOUT
+========================================================== -->
+
+<div class="dashboard-container">
+
+    <!-- ==========================================================
+         MOBILE SIDEBAR OVERLAY
+    =========================================================== -->
+
+    <div
+        class="sidebar-overlay"
+        *ngIf="sidebarOpen"
+        (click)="toggleSidebar()">
+    </div>
+
+    <!-- ==========================================================
+         SIDEBAR
+    =========================================================== -->
+
+    <aside
+        class="sidebar"
+        [class.open]="sidebarOpen">
+
+        <!-- Logo -->
+
+        <div class="logo-section">
+
+            <img
+                src="assets/images/logo1.png"
+                alt="Logo"
+                class="logo">
+
+            <div class="logo-details">
+
+                <h2>Vighnahar Residence</h2>
+
+                <p>Resident Portal</p>
+
+            </div>
+
+        </div>
+
+        <!-- Navigation -->
+
+        <nav class="menu">
+
+            <p class="menu-heading">MAIN</p>
+
+            <a
+                (click)="navigateTo(
+                '/resident-dashboard/dashboard',
+                'Resident Dashboard',
+                'Loading your dashboard...',
+                'dashboard'
+                )"
+                routerLinkActive="active">
+
+                <i class="bi bi-grid-fill"></i>
+
+                <span>Dashboard</span>
+
+            </a>
+
+            <p class="menu-heading">SERVICES</p>
+
+            <a
+                (click)="navigateTo(
+                    '/resident-dashboard/visitors',
+                    'Visitor Management',
+                    'Opening visitor records...',
+                    'badge'
+                    )">
+
+                <i class="bi bi-person-walking"></i>
+
+                <span>Visitors</span>
+
+            </a>
+
+            <a
+                (click)="navigateTo(
+                    '/resident-dashboard/maintenance',
+                    'Maintenance',
+                    'Loading maintenance details...',
+                    'payments'
+                    )">
+
+                <i class="bi bi-credit-card-fill"></i>
+
+                <span>Maintenance</span>
+
+            </a>
+
+            <a
+                (click)="navigateTo(
+                    '/resident-dashboard/notices',
+                    'Society Notices',
+                    'Fetching latest notices...',
+                    'campaign'
+                    )">
+
+                <i class="bi bi-megaphone-fill"></i>
+
+                <span>Notices</span>
+
+            </a>
+
+            <a
+                (click)="navigateTo(
+                    '/resident-dashboard/events',
+                    'Community Events',
+                    'Loading upcoming events...',
+                    'celebration'
+                    )">
+
+                <i class="bi bi-calendar-event-fill"></i>
+
+                <span>Events</span>
+
+            </a>
+
+            <a
+                (click)="navigateTo(
+                    '/resident-dashboard/complaints',
+                    'Complaints',
+                    'Opening complaint center...',
+                    'report_problem'
+                    )">
+
+                <i class="bi bi-exclamation-triangle-fill"></i>
+
+                <span>Complaints</span>
+
+            </a>
+
+            <a
+                (click)="navigateTo(
+                '/resident-dashboard/rules',
+                '📜 Society Guidelines',
+                'Loading Guidelines...',
+                'gavel'
+                )">
+                <i class="bi bi-journal-text"></i>
+
+                <span>Society Guidelines</span>
+
+                </a>
+              <p class="menu-heading">PROFILE</p>
+
+            <a
+                (click)="navigateTo(
+                '/resident-dashboard/profile',
+                'My Profile',
+                'Loading your profile...',
+                'person'
+                )">
+
+                <i class="bi bi-person-circle"></i>
+
+                <span>My Profile</span>
+
+            </a>
+
+
+        </nav>
+
+        <!-- Logout -->
+
+        <div class="sidebar-footer">
+
+            <button
+                class="logout-btn"
+                (click)="logout()">
+
+                <i class="bi bi-box-arrow-right"></i>
+
+                Logout
+
+            </button>
+
+        </div>
+
+    </aside>
+
+    <!-- ==========================================================
+         MAIN CONTENT
+    =========================================================== -->
+
+    <main class="main-content">
+
+        <!-- ==========================================================
+             HEADER
+        =========================================================== -->
+
+        <header class="top-header">
+
+            <div class="header-left">
+
+                <button
+                    class="menu-toggle"
+                    (click)="toggleSidebar()">
+
+                    <i class="bi bi-list"></i>
+
+                </button>
+
+                <div>
+
+                    <span class="page-title">
+
+                        Resident Dashboard
+
+                    </span>
+
+                    <h1>
+
+                        {{ greeting }}, {{ currentUser?.fullName || 'Resident' }} 👋
+
+                    </h1>
+
+                    <p>
+
+                        Welcome back to Vighnahar Residence Society Management System.
+
+                    </p>
+
+                    <small>
+
+                        {{ todayDate }}
+
+                    </small>
+
+                </div>
+
+            </div>
+
+            <div class="header-right">
+
+                <!-- Notification -->
+
+                <div class="notification-wrapper">
+
+                    <div
+                        class="notification-bell"
+                        (click)="toggleNotifications()">
+
+                        <i
+                            class="bi bi-bell-fill bell-icon"
+                            [class.shake]="notificationCount>0">
+                        </i>
+
+                        <span
+                            *ngIf="notificationCount>0"
+                            class="notification-count">
+
+                            {{ notificationCount }}
+
+                        </span>
+
+                    </div>
+
+                    <!-- Notification Dropdown -->
+
+                    <div
+                        class="notification-dropdown"
+                        *ngIf="showNotifications">
+
+                        <div class="dropdown-header">
+
+                            <h4>
+
+                                Notifications
+
+                            </h4>
+
+                            <button
+                                class="mark-read-btn"
+                                (click)="markAllRead()">
+
+                                Mark All Read
+
+                            </button>
+
+                        </div>
+
+                        <div
+                            class="notification-item"
+                            *ngFor="let notification of notifications">
+
+                            <strong>
+
+                                {{ notification.title }}
+
+                            </strong>
+
+                            <p>
+
+                                {{ notification.message }}
+
+                            </p>
+
+                            <small>
+
+                                {{ notification.createdDate }}
+
+                            </small>
+
+                        </div>
+
+                        <div
+                            class="empty-notification"
+                            *ngIf="notifications.length===0">
+
+                            No Notifications Available
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Resident Profile -->
+
+                <div class="admin-profile">
+
+                    <div class="admin-avatar">
+
+                        <i class="bi bi-person-fill"></i>
+
+                    </div>
+
+                    <div class="admin-details">
+
+                        <h3>
+
+                            {{ currentUser?.fullName || 'Resident' }}
+
+                        </h3>
+
+                        <span>
+
+                            Flat No. {{ currentUser?.flatNo || '--' }}
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- ==========================================================
+             PAGE CONTENT
+        =========================================================== -->
+
+        <section class="page-content">
+
+            <router-outlet></router-outlet>
+
+        </section>
+
+    </main>
+
+</div>

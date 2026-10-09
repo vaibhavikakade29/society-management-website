@@ -1,0 +1,92 @@
+<!-- Floating AI Button -->
+
+<button
+    class="ai-toggle"
+    (click)="isOpen = !isOpen">
+
+    <i class="bi bi-robot"></i>
+
+</button>
+
+<!-- Chat Window -->
+
+<div
+    class="chat-container"
+    *ngIf="isOpen">
+
+    <!-- Header -->
+
+    <div class="chat-header">
+
+        <div class="header-left">
+
+            <i class="bi bi-robot"></i>
+
+            <div>
+
+                <h3>Vighnahar AI Assistant</h3>
+
+                <small>Ask anything about our society</small>
+
+            </div>
+
+        </div>
+
+        <button
+            class="close-btn"
+            (click)="isOpen=false">
+
+            <i class="bi bi-x-lg"></i>
+
+        </button>
+
+    </div>
+
+    <!-- Messages -->
+
+    <div
+        class="chat-body"
+        id="chatBody">
+
+        <div
+            *ngFor="let message of messages"
+            class="message"
+            [ngClass]="message.sender">
+
+            {{message.text}}
+
+        </div>
+
+        <div
+            *ngIf="isTyping"
+            class="typing">
+
+            AI is typing...
+
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+
+    <div class="chat-footer">
+
+        <input
+
+            type="text"
+
+            [(ngModel)]="userMessage"
+
+            (keydown)="onEnter($event)"
+
+            placeholder="Ask your question...">
+
+        <button (click)="sendMessage()">
+
+            <i class="bi bi-send-fill"></i>
+
+        </button>
+
+    </div>
+
+</div>

@@ -1,0 +1,27 @@
+<div
+  class="page-loader-overlay"
+  *ngIf="visible$ | async">
+
+    <div class="loader-content">
+
+        <div class="loader-logo">
+
+            <mat-icon>{{ icon$ | async }}</mat-icon>
+
+        </div>
+
+        <h2>Vighnahar Residence</h2>
+
+        <p>{{ title$ | async }}</p>
+
+        <div class="loader-dots">
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </div>
+
+    </div>
+
+</div>

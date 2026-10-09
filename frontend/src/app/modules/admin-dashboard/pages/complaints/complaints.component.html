@@ -1,0 +1,218 @@
+<div class="page">
+
+  <h2>📝 Complaints Management</h2>
+
+  <div
+    class="success-message"
+    *ngIf="successMessage">
+
+    {{ successMessage }}
+
+  </div>
+    <div
+    class="error-message"
+    *ngIf="errorMessage">
+
+    {{ errorMessage }}
+
+  </div>
+  <!-- Statistics -->
+
+  <div class="stats-container">
+
+    <div class="stat-card">
+      <h3>{{ totalComplaints }}</h3>
+      <p>Total Complaints</p>
+    </div>
+
+    <div class="stat-card">
+      <h3>{{ pendingComplaints }}</h3>
+      <p>Pending</p>
+    </div>
+
+    <div class="stat-card">
+      <h3>{{ inProgressComplaints }}</h3>
+      <p>In Progress</p>
+    </div>
+
+    <div class="stat-card">
+      <h3>{{ resolvedComplaints }}</h3>
+      <p>Resolved</p>
+    </div>
+
+  </div>
+
+  <!-- Search -->
+
+  <div class="search-box">
+
+    <input
+      type="text"
+      placeholder="Search Complaint"
+      [(ngModel)]="searchText"
+      (input)="searchComplaint()">
+
+  </div>
+
+  <!-- Complaint Table -->
+
+  <div class="complaint-list">
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>Resident</th>
+          <th>Flat</th>
+          <th>Category</th>
+          <th>Priority</th>
+          <th>Status</th>
+          <th>Date</th>
+          <th>Actions</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <tr *ngFor="let complaint of filteredComplaints">
+
+          <td>{{ complaint.residentName }}</td>
+
+          <td>{{ complaint.flatNo }}</td>
+
+          <td>{{ complaint.category }}</td>
+
+          <td>{{ complaint.priority }}</td>
+
+          <td>
+
+            <span class="status">
+
+              {{ complaint.status }}
+
+            </span>
+
+          </td>
+
+          <td>{{ complaint.createdAt | date:'dd/MM/yyyy' }}</td>
+
+          <td>
+
+            <button
+              class="view-btn"
+              (click)="viewComplaint(complaint)">
+
+              View
+
+            </button>
+
+            <select
+              [(ngModel)]="complaint.status"
+              (change)="viewComplaint(complaint); 
+              updateStatus()">
+
+              <option value="Pending">
+                Pending
+              </option>
+
+              <option value="In Progress">
+                In Progress
+              </option>
+
+              <option value="Resolved">
+                Resolved
+              </option>
+
+              <option value="Rejected">
+                Rejected
+              </option>
+
+            </select>
+
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
+
+<!-- Complaint Details Modal -->
+
+<div
+  class="modal"
+  *ngIf="selectedComplaint">
+
+  <div class="modal-content">
+
+    <h2>Complaint Details</h2>
+
+    <p>
+      <strong>Resident:</strong>
+      {{ selectedComplaint.residentName }}
+    </p>
+
+    <p>
+      <strong>Flat:</strong>
+      {{ selectedComplaint.flatNo }}
+    </p>
+
+    <p>
+      <strong>Category:</strong>
+      {{ selectedComplaint.category }}
+    </p>
+
+    <p>
+      <strong>Priority:</strong>
+      {{ selectedComplaint.priority }}
+    </p>
+
+    <p>
+      <strong>Description:</strong>
+      {{ selectedComplaint.description }}
+    </p>
+
+    <p>
+      <strong>Status:</strong>
+      {{ selectedComplaint.status }}
+    </p>
+
+    <label>
+
+      <strong>Admin Remarks</strong>
+
+    </label>
+
+    <textarea
+      rows="4"
+      [(ngModel)]="selectedComplaint.adminRemarks">
+
+    </textarea>
+
+    <button
+      class="view-btn"
+      (click)="saveRemarks()">
+
+      Save Remarks
+
+    </button>
+
+    <button
+      class="close-btn"
+      (click)="closeComplaint()">
+
+      Close
+
+    </button>
+
+  </div>
+
+</div>

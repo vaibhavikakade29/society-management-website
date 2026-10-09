@@ -1,0 +1,330 @@
+<div class="dashboard">
+
+    <!-- =====================================================
+                    PAGE HEADER
+    ====================================================== -->
+
+    <div class="dashboard-header">
+
+        <div>
+
+            <h2>Resident Dashboard</h2>
+
+            <p>
+                Welcome back,
+                <strong>{{ currentUser?.fullName }}</strong>
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- =====================================================
+                    STATISTICS
+    ====================================================== -->
+
+    <div class="stats-grid">
+
+        <div class="stat-card visitors">
+
+            <div class="stat-icon">
+                <i class="fa-solid fa-user-group"></i>
+            </div>
+
+            <div>
+
+                <h3>{{visitorCount}}</h3>
+
+                <span>Pending Visitors</span>
+
+            </div>
+
+        </div>
+
+        <div class="stat-card complaints">
+
+            <div class="stat-icon">
+                <i class="fa-solid fa-file-circle-exclamation"></i>
+            </div>
+
+            <div>
+
+                <h3>{{complaintCount}}</h3>
+
+                <span>My Complaints</span>
+
+            </div>
+
+        </div>
+
+        <div class="stat-card maintenance">
+
+            <div class="stat-icon">
+                <i class="fa-solid fa-wallet"></i>
+            </div>
+
+            <div>
+
+                <h3>{{pendingBills}}</h3>
+
+                <span>Pending Bills</span>
+
+            </div>
+
+        </div>
+
+        <div class="stat-card events">
+
+            <div class="stat-icon">
+                <i class="fa-solid fa-calendar-days"></i>
+            </div>
+
+            <div>
+
+                <h3>{{upcomingEvents}}</h3>
+
+                <span>Upcoming Events</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- =====================================================
+                    DASHBOARD CONTENT
+    ====================================================== -->
+
+<div class="dashboard-grid">
+
+    <!-- ================= Latest Notices ================= -->
+
+    <div class="dashboard-card notice-section">
+
+        <h3>
+            <i class="fa-solid fa-bullhorn"></i>
+            Latest Notices
+        </h3>
+
+        <div
+            *ngFor="let notice of notices | slice:0:5"
+            class="list-item notice-item">
+
+            <div>
+
+                <strong>{{notice.title}}</strong>
+
+                <p>{{notice.noticeType}}</p>
+
+            </div>
+
+            <span>{{notice.createdAt | date:'dd MMM'}}</span>
+
+        </div>
+
+        <div
+            *ngIf="notices.length==0"
+            class="empty">
+
+            No notices available.
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= Events ================= -->
+
+    <div class="dashboard-card event-section">
+
+        <h3>
+            <i class="fa-solid fa-calendar-days"></i>
+            Upcoming Events
+        </h3>
+
+        <div
+            *ngFor="let event of events | slice:0:5"
+            class="list-item event-item">
+
+            <div>
+
+                <strong>{{event.title}}</strong>
+
+                <p>{{event.location}}</p>
+
+            </div>
+
+            <span>{{event.eventDate | date:'dd MMM'}}</span>
+
+        </div>
+
+        <div
+            *ngIf="events.length==0"
+            class="empty">
+
+            No upcoming events.
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= Visitors ================= -->
+
+    <div class="dashboard-card visitor-section">
+
+        <h3>
+            <i class="fa-solid fa-user-group"></i>
+            Recent Visitors
+        </h3>
+
+        <div
+            *ngFor="let visitor of visitors | slice:0:5"
+            class="list-item visitor-item">
+
+            <div>
+
+                <strong>{{visitor.visitorName}}</strong>
+
+                <p>{{visitor.purpose}}</p>
+
+            </div>
+
+            <span>{{visitor.status}}</span>
+
+        </div>
+
+        <div
+            *ngIf="visitors.length==0"
+            class="empty">
+
+            No visitor records.
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= Complaints ================= -->
+
+    <div class="dashboard-card complaint-section">
+
+        <h3>
+            <i class="fa-solid fa-screwdriver-wrench"></i>
+            Recent Complaints
+        </h3>
+
+        <div
+            *ngFor="let complaint of complaints | slice:0:5"
+            class="list-item complaint-item">
+
+            <div>
+
+                <strong>{{complaint.category}}</strong>
+
+                <p>{{complaint.description}}</p>
+
+            </div>
+
+            <span>{{complaint.status}}</span>
+
+        </div>
+
+        <div
+            *ngIf="complaints.length==0"
+            class="empty">
+
+            No complaints submitted.
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= Maintenance ================= -->
+
+    <div class="dashboard-card maintenance-section">
+
+        <h3>
+            <i class="fa-solid fa-wallet"></i>
+            Maintenance Bills
+        </h3>
+
+        <div
+            *ngFor="let bill of maintenanceBills | slice:0:5"
+            class="list-item maintenance-item">
+
+            <div>
+
+                <strong>
+
+                    {{bill.billMonth}} {{bill.billYear}}
+
+                </strong>
+
+                <p>
+
+                    ₹ {{bill.maintenanceAmount}}
+
+                </p>
+
+            </div>
+
+            <span>{{bill.status}}</span>
+
+        </div>
+
+        <div
+            *ngIf="maintenanceBills.length==0"
+            class="empty">
+
+            No maintenance bills.
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= Notifications ================= -->
+
+    <div class="dashboard-card notification-section">
+
+        <h3>
+            <i class="fa-solid fa-bell"></i>
+            Recent Notifications
+        </h3>
+
+        <div
+            *ngFor="let notification of notifications | slice:0:5"
+            class="notification-item">
+
+            <div class="notification-dot"></div>
+
+            <div>
+
+                <strong>{{notification.title}}</strong>
+
+                <p>{{notification.message}}</p>
+
+                <small>
+
+                    {{notification.createdAt | date:'medium'}}
+
+                </small>
+
+            </div>
+
+        </div>
+
+        <div
+            *ngIf="notifications.length==0"
+            class="empty">
+
+            No notifications available.
+
+        </div>
+
+    </div>
+
+</div>
+</div>

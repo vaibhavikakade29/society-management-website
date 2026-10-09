@@ -1,0 +1,143 @@
+<footer class="footer">
+
+  <div class="container">
+
+    <div class="row">
+
+      <!-- BRAND -->
+      <div class="col-lg-4 mb-4">
+
+        <div class="logo-circle">
+          <img src="assets/images/logo1.png" alt="Logo">
+        </div>
+
+        <h4>Vighnahar Residence</h4>
+
+        <p>
+          Luxury living with modern amenities, secure environment,
+          and a peaceful community lifestyle.
+        </p>
+
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+
+      </div>
+
+      <!-- LINKS -->
+      <div class="col-lg-2 col-md-6 mb-4">
+        <h5>Quick Links</h5>
+        <ul>
+          <li>
+            <a
+            class="nav-link"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            (click)="navigateWithLoader(
+              '/',
+              'Welcome Home',
+              'Opening Home Page...',
+              'home'
+            )">
+
+            Home
+
+          </a>
+          </li>
+          <li>
+            <a
+            class="nav-link"
+            routerLinkActive="active"
+            (click)="navigateWithLoader(
+              '/about',
+              '🏢 Vighnahar Residence',
+              'Discovering Our Community...',
+              'apartment'
+            )">
+
+            About
+
+          </a>
+
+          </li>
+          <li>
+            <a
+            class="nav-link"
+            routerLinkActive="active"
+            (click)="navigateWithLoader(
+              '/amenities',
+              '🌿 Premium Amenities',
+              'Loading Facilities...',
+              'pool'
+            )">
+
+            Amenities
+
+          </a>
+          </li>
+          <li>
+            <a
+            class="nav-link"
+            routerLinkActive="active"
+            (click)="navigateWithLoader(
+              '/community-life',
+              '🎉 Community Life',
+              'Opening Events & Activities...',
+              'celebration'
+            )">
+
+            Community Life
+
+          </a>
+          </li>
+          <li>
+            <a
+            class="nav-link"
+            routerLinkActive="active"
+            (click)="navigateWithLoader(
+              '/contact',
+              '📞 Contact Us',
+              'Connecting You...',
+              'call'
+            )">
+
+            Contact
+
+          </a>
+          </li>
+        </ul>
+      </div>
+      <!-- CONTACT -->
+      <div class="col-lg-3 col-md-6 mb-4">
+        <h5>Contact</h5>
+        <p><i class="fas fa-phone"></i> +91 9876543210</p>
+        <p><i class="fas fa-envelope"></i> info@vighnahar.com</p>
+        <p><i class="fas fa-map-marker-alt"></i> Pune, Maharashtra</p>
+      </div>
+
+      <!-- NEWSLETTER -->
+      <div class="col-lg-3 mb-4">
+        <h5>Newsletter</h5>
+
+        <p>Subscribe to get latest updates & offers.</p>
+
+        <div class="newsletter">
+          <input type="email" placeholder="Enter email">
+          <button>Join</button>
+        </div>
+      </div>
+
+    </div>
+
+    <hr>
+
+    <div class="copyright">
+      © 2026 Vighnahar Residence. All Rights Reserved.
+    </div>
+
+  </div>
+
+</footer>

@@ -1,0 +1,5 @@
+<app-preloader *ngIf="showPreloader"></app-preloader>
+<app-page-loader></app-page-loader>
+<app-toast></app-toast>
+<app-ai-assistant></app-ai-assistant>
+<router-outlet *ngIf="!showPreloader"></router-outlet>

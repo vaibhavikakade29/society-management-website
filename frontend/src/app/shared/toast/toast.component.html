@@ -1,0 +1,38 @@
+<div
+    class="toast-container"
+    *ngIf="(toast$ | async)?.show">
+
+    <div
+        class="toast-box"
+        [class.success]="(toast$ | async)?.type==='success'"
+        [class.error]="(toast$ | async)?.type==='error'"
+        [class.info]="(toast$ | async)?.type==='info'">
+
+        <div class="icon">
+
+                <span *ngIf="(toast$ | async)?.type==='success'">✔</span>
+
+                <span *ngIf="(toast$ | async)?.type==='error'">✖</span>
+
+                <span *ngIf="(toast$ | async)?.type==='info'">ℹ</span>
+
+                </div>
+
+        <div class="content">
+
+            <h4>
+
+                {{ (toast$ | async)?.type | titlecase }}
+
+                </h4>
+
+                <p>
+
+                {{ (toast$ | async)?.message }}
+
+                </p>
+        </div>
+
+    </div>
+
+</div>

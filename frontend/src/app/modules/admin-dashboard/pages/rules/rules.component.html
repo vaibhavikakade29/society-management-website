@@ -1,0 +1,382 @@
+<!-- ==========================================================
+                    PAGE HEADER
+========================================================== -->
+
+<div class="rules-container">
+
+    <div class="page-header">
+
+        <div>
+
+            <h2>
+                <i class="bi bi-journal-check"></i>
+                Society Rules & Regulations
+            </h2>
+
+            <p>
+                Create, update and manage society guidelines for all residents.
+            </p>
+
+        </div>
+
+        <button
+            class="btn-add"
+            (click)="openAddForm()">
+
+            <i class="bi bi-plus-circle"></i>
+
+            Add Guideline
+
+        </button>
+
+    </div>
+
+
+    <!-- ==========================================================
+                        STATISTICS
+    ========================================================== -->
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+
+            <i class="bi bi-journal-bookmark-fill"></i>
+
+            <div>
+
+                <h3>{{rules.length}}</h3>
+
+                <span>Total Guidelines</span>
+
+            </div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <i class="bi bi-pin-angle-fill"></i>
+
+            <div>
+
+                <h3>{{pinnedCount}}</h3>
+
+                <span>Pinned</span>
+
+            </div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <i class="bi bi-exclamation-circle-fill"></i>
+
+            <div>
+
+                <h3>{{highPriorityCount}}</h3>
+
+                <span>High Priority</span>
+
+            </div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <i class="bi bi-grid-fill"></i>
+
+            <div>
+
+                <h3>{{categories.length}}</h3>
+
+                <span>Categories</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================================
+                        FILTERS
+    ========================================================== -->
+
+    <div class="filter-card">
+
+        <input
+            type="text"
+            placeholder="Search guideline..."
+            [(ngModel)]="searchText"
+            (input)="filterRules()">
+
+        <select
+            [(ngModel)]="selectedCategory"
+            (change)="filterRules()">
+
+            <option value="">All Categories</option>
+
+            <option
+                *ngFor="let category of categories"
+                [value]="category">
+
+                {{category}}
+
+            </option>
+
+        </select>
+
+        <select
+            [(ngModel)]="selectedPriority"
+            (change)="filterRules()">
+
+            <option value="">All Priority</option>
+
+            <option
+                *ngFor="let priority of priorities"
+                [value]="priority">
+
+                {{priority}}
+
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <!-- ==========================================================
+                        RULES
+    ========================================================== -->
+
+    <div
+        class="rules-grid"
+        *ngIf="filteredRules.length>0">
+
+        <div
+            class="rule-card"
+            *ngFor="let rule of filteredRules">
+
+            <div
+                class="pin"
+                *ngIf="rule.isPinned">
+
+                <i class="bi bi-pin-angle-fill"></i>
+
+                Pinned
+
+            </div>
+
+            <h3>
+
+                {{rule.title}}
+
+            </h3>
+
+            <p>
+
+                {{rule.description}}
+
+            </p>
+
+            <div class="rule-meta">
+
+                <span class="category">
+
+                    {{rule.category}}
+
+                </span>
+
+                <span
+                    class="priority"
+
+                    [ngClass]="{
+
+                    high:rule.priority=='High',
+
+                    normal:rule.priority=='Normal',
+
+                    low:rule.priority=='Low'
+
+                }">
+
+                    {{rule.priority}}
+
+                </span>
+
+            </div>
+
+            <div class="rule-footer">
+
+                <small>
+
+                    {{rule.createdAt | date:'dd MMM yyyy'}}
+
+                </small>
+
+                <div class="actions">
+
+                    <button
+                        class="btn-edit"
+                        (click)="editRule(rule)">
+
+                        <i class="bi bi-pencil-fill"></i>
+
+                    </button>
+
+                    <button
+                        class="btn-delete"
+                        (click)="deleteRule(rule._id)">
+
+                        <i class="bi bi-trash-fill"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================================
+                        EMPTY
+    ========================================================== -->
+
+    <div
+        class="empty"
+        *ngIf="filteredRules.length==0">
+
+        <i class="bi bi-journal-x"></i>
+
+        <h3>
+
+            No Guidelines Found
+
+        </h3>
+
+        <p>
+
+            Click "Add Guideline" to create your first society guideline.
+
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- ==========================================================
+                    ADD / EDIT MODAL
+========================================================== -->
+
+<div
+    class="modal-overlay"
+    *ngIf="showForm">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h3>
+
+                {{isEdit ? 'Update Guideline' : 'Add Guideline'}}
+
+            </h3>
+
+            <button
+                class="close-btn"
+                (click)="closeForm()">
+
+                <i class="bi bi-x-lg"></i>
+
+            </button>
+
+        </div>
+
+        <div class="modal-body">
+
+            <label>Title</label>
+
+            <input
+                type="text"
+                [(ngModel)]="formData.title">
+
+            <label>Description</label>
+
+            <textarea
+                rows="4"
+                [(ngModel)]="formData.description">
+
+            </textarea>
+
+            <label>Category</label>
+
+            <select
+                [(ngModel)]="formData.category">
+
+                <option
+                    *ngFor="let category of categories"
+                    [value]="category">
+
+                    {{category}}
+
+                </option>
+
+            </select>
+
+            <label>Priority</label>
+
+            <select
+                [(ngModel)]="formData.priority">
+
+                <option
+                    *ngFor="let priority of priorities"
+                    [value]="priority">
+
+                    {{priority}}
+
+                </option>
+
+            </select>
+
+            <div class="checkbox">
+
+                <input
+                    type="checkbox"
+                    [(ngModel)]="formData.isPinned">
+
+                <span>
+
+                    Pin this guideline
+
+                </span>
+
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <button
+                class="btn-cancel"
+                (click)="closeForm()">
+
+                Cancel
+
+            </button>
+
+            <button
+                class="btn-save"
+                (click)="saveRule()">
+
+                {{isEdit ? 'Update' : 'Save'}}
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,324 @@
+<div class="rules-container">
+
+
+    <!-- PAGE HEADER -->
+
+    <div class="page-header">
+
+
+        <div>
+
+            <h2>
+
+                <i class="bi bi-journal-check"></i>
+
+                Society Rules & Regulations
+
+            </h2>
+
+
+            <p>
+
+                View important society guidelines and regulations.
+
+            </p>
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+    <!-- FILTER SECTION -->
+
+
+    <div class="filter-card">
+
+
+        <input
+
+            type="text"
+
+            placeholder="Search guideline..."
+
+            [(ngModel)]="searchText"
+
+            (input)="filterRules()">
+
+
+        
+
+        <select
+
+            [(ngModel)]="selectedCategory"
+
+            (change)="filterRules()">
+
+
+
+            <option value="">
+
+                All Categories
+
+            </option>
+
+
+
+            <option
+
+                *ngFor="let category of categories"
+
+                [value]="category">
+
+
+                {{category}}
+
+
+            </option>
+
+
+        </select>
+
+
+
+
+
+        <select
+
+            [(ngModel)]="selectedPriority"
+
+            (change)="filterRules()">
+
+
+
+            <option value="">
+
+                All Priority
+
+            </option>
+
+
+
+            <option
+
+                *ngFor="let priority of priorities"
+
+                [value]="priority">
+
+
+                {{priority}}
+
+
+            </option>
+
+
+        </select>
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+    <!-- RULE CARDS -->
+
+
+    <div
+
+
+        class="rules-grid"
+
+
+        *ngIf="filteredRules.length > 0">
+
+
+
+        <div
+
+
+            class="rule-card"
+
+
+            *ngFor="let rule of filteredRules">
+
+
+
+
+
+            <div
+
+
+                class="pin"
+
+
+                *ngIf="rule.isPinned">
+
+
+                <i class="bi bi-pin-angle-fill"></i>
+
+
+                Important
+
+
+            </div>
+
+
+
+
+
+            <h3>
+
+
+                {{rule.title}}
+
+
+            </h3>
+
+
+
+
+
+            <p>
+
+
+                {{rule.description}}
+
+
+            </p>
+
+
+
+
+
+            <div class="rule-meta">
+
+
+                <span class="category">
+
+
+                    {{rule.category}}
+
+
+                </span>
+
+
+
+
+
+                <span
+
+
+                    class="priority"
+
+
+                    [ngClass]="{
+
+
+                    high:rule.priority=='High',
+
+
+                    normal:rule.priority=='Normal',
+
+
+                    low:rule.priority=='Low'
+
+
+                    }">
+
+
+
+                    {{rule.priority}}
+
+
+                </span>
+
+
+
+            </div>
+
+
+
+
+
+
+            <div class="rule-footer">
+
+
+                <small>
+
+
+                    Added on :
+
+                    {{rule.createdAt | date:'dd MMM yyyy'}}
+
+
+                </small>
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+    <!-- EMPTY -->
+
+
+    <div
+
+
+        class="empty"
+
+
+        *ngIf="filteredRules.length==0">
+
+
+
+        <i class="bi bi-journal-x"></i>
+
+
+
+        <h3>
+
+
+            No Guidelines Available
+
+
+        </h3>
+
+
+
+        <p>
+
+
+            Society rules will appear here once uploaded by admin.
+
+
+        </p>
+
+
+
+    </div>
+
+
+
+</div>

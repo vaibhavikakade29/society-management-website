@@ -1,0 +1,480 @@
+<!-- ==========================================================
+                    DASHBOARD HOME
+=========================================================== -->
+
+<!-- ==========================================================
+                    WELCOME SECTION
+=========================================================== -->
+
+<section class="dashboard-banner">
+
+    <div class="banner-content">
+
+        <div>
+
+            <span class="banner-tag">
+
+                SOCIETY MANAGEMENT
+
+            </span>
+
+            <h2>
+
+                Welcome Back, Admin 👋
+
+            </h2>
+
+            <p>
+
+                Manage your society efficiently from one place.
+
+            </p>
+
+        </div>
+
+        <div class="society-info">
+
+            <h3>
+
+                Vighnahar Residence
+
+            </h3>
+
+            <span>
+
+                Smart Society Management System
+
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ==========================================================
+                    STATISTICS
+=========================================================== -->
+<section class="stats-grid">
+
+<div class="stat-card residents">
+<div class="stat-left">
+<span>Total Residents</span>
+<h2>{{totalResidents}}</h2>
+<p><i class="bi bi-arrow-up"></i> Active Members</p>
+</div>
+<div class="stat-right">
+<i class="bi bi-people-fill"></i>
+</div>
+</div>
+
+<div class="stat-card visitors">
+<div class="stat-left">
+<span>Visitors</span>
+<h2>{{visitors}}</h2>
+<p><i class="bi bi-person-check-fill"></i> Today's Entries</p>
+</div>
+<div class="stat-right">
+<i class="bi bi-person-walking"></i>
+</div>
+</div>
+
+<div class="stat-card complaints">
+<div class="stat-left">
+<span>Complaints</span>
+<h2>{{complaints}}</h2>
+<p><i class="bi bi-clock-history"></i> Pending Cases</p>
+</div>
+<div class="stat-right">
+<i class="bi bi-exclamation-triangle-fill"></i>
+</div>
+</div>
+
+<div class="stat-card maintenance">
+<div class="stat-left">
+<span>Maintenance</span>
+<h2>₹ {{pendingBills}}</h2>
+<p><i class="bi bi-credit-card"></i> Pending Amount</p>
+</div>
+<div class="stat-right">
+<i class="bi bi-cash-stack"></i>
+</div>
+</div>
+
+</section>
+<!-- ==========================================================
+                FIRST ROW
+=========================================================== -->
+
+<section class="dashboard-grid">
+
+    <!-- Society Overview -->
+
+    <div class="dashboard-card chart-card">
+<div class="card-header">
+<div>
+<h3>Resident Analytics</h3>
+<p>Monthly Resident Registration</p>
+</div>
+<i class="bi bi-bar-chart-fill"></i>
+</div>
+<div class="chart-container">
+<canvas id="residentChart"></canvas>
+</div>
+</div>
+    <!-- Maintenance -->
+
+    <div class="dashboard-card chart-card">
+<div class="card-header">
+<div>
+<h3>Complaint Analytics</h3>
+<p>Current Complaint Status</p>
+</div>
+<i class="bi bi-pie-chart-fill"></i>
+</div>
+<div class="chart-container">
+<canvas id="complaintChart"></canvas>
+</div>
+</div>
+</section>
+
+<!-- ==========================================================
+                SECOND ROW
+=========================================================== -->
+
+<section class="dashboard-grid">
+
+    <!-- Notices -->
+
+    <div class="dashboard-card">
+
+        <div class="card-header">
+
+            <h3>Recent Notices</h3>
+
+            <i class="bi bi-megaphone-fill"></i>
+
+        </div>
+
+        <div class="list-area">
+
+            <div
+                class="list-item"
+                *ngFor="let notice of latestNotices">
+
+                <h4>
+
+                    {{ notice.title }}
+
+                </h4>
+
+                <p>
+
+                    {{ notice.description }}
+
+                </p>
+
+            </div>
+
+            <div
+                class="empty-card"
+                *ngIf="latestNotices.length==0">
+
+                No notices available
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Events -->
+
+    <div class="dashboard-card">
+
+        <div class="card-header">
+
+            <h3>Upcoming Events</h3>
+
+            <i class="bi bi-calendar-event-fill"></i>
+
+        </div>
+
+        <div class="list-area">
+
+            <div
+                class="list-item"
+                *ngFor="let event of upcomingEvents">
+
+                <h4>
+
+                    {{ event.title }}
+
+                </h4>
+
+                <p>
+
+                    📍 {{ event.location }}
+
+                </p>
+
+                <small>
+
+                    {{ event.eventDate | date:'dd MMM yyyy' }}
+
+                </small>
+
+            </div>
+
+            <div
+                class="empty-card"
+                *ngIf="upcomingEvents.length==0">
+
+                No events available
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ==========================================================
+                THIRD ROW
+=========================================================== -->
+
+<section class="dashboard-grid">
+
+    <!-- Visitors -->
+
+    <div class="dashboard-card">
+
+        <div class="card-header">
+
+            <h3>Recent Visitors</h3>
+
+            <i class="bi bi-person-walking"></i>
+
+        </div>
+
+        <div class="list-area">
+
+            <div
+                class="list-item"
+                *ngFor="let visitor of recentVisitors">
+
+                <h4>
+
+                    {{ visitor.visitorName }}
+
+                </h4>
+
+                <p>
+
+                    Flat :  {{ visitor.resident?.flatNo }}
+
+                </p>
+
+                <small>
+
+                    {{ visitor.visitDate | date:'dd MMM yyyy' }}
+
+                </small>
+
+            </div>
+
+            <div
+                class="empty-card"
+                *ngIf="recentVisitors.length==0">
+
+                No visitors available
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Complaints -->
+
+    <div class="dashboard-card">
+
+        <div class="card-header">
+
+            <h3>Recent Complaints</h3>
+
+            <i class="bi bi-exclamation-triangle-fill"></i>
+
+        </div>
+
+        <div class="list-area">
+
+            <div
+                class="list-item"
+                *ngFor="let complaint of recentComplaints">
+
+                <div class="list-header">
+
+                    <h4>
+
+                        {{ complaint.category }}
+
+                    </h4>
+
+                    <span class="status">
+
+                        {{ complaint.status }}
+
+                    </span>
+
+                </div>
+
+                <p>
+
+                    {{ complaint.description }}
+
+                </p>
+
+            </div>
+
+            <div
+                class="empty-card"
+                *ngIf="recentComplaints.length==0">
+
+                No complaints available
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- ==========================================================
+                    QUICK ACTIONS
+=========================================================== -->
+
+<section class="quick-actions">
+
+    <div class="section-header">
+
+        <h3>Quick Actions</h3>
+
+        <h4>Frequently Used Modules</h4>
+
+    </div>
+
+    <div class="action-grid">
+
+        <a
+            routerLink="/admin-dashboard/residents"
+            class="action-card">
+
+            <div class="action-icon">
+                <i class="bi bi-people-fill"></i>
+            </div>
+
+            <div class="action-text">
+
+                <h4>Residents</h4>
+
+                <p>Manage society residents</p>
+
+            </div>
+
+        </a>
+
+        <a
+            routerLink="/admin-dashboard/visitors"
+            class="action-card">
+
+            <div class="action-icon">
+                <i class="bi bi-person-walking"></i>
+            </div>
+
+            <div class="action-text">
+
+                <h4>Visitors</h4>
+
+                <p>Track visitor entries</p>
+
+            </div>
+
+        </a>
+
+        <a
+            routerLink="/admin-dashboard/notices"
+            class="action-card">
+
+            <div class="action-icon">
+                <i class="bi bi-megaphone-fill"></i>
+            </div>
+
+            <div class="action-text">
+
+                <h4>Notices</h4>
+
+                <p>Publish society notices</p>
+
+            </div>
+
+        </a>
+
+        <a
+            routerLink="/admin-dashboard/events"
+            class="action-card">
+
+            <div class="action-icon">
+                <i class="bi bi-calendar-event-fill"></i>
+            </div>
+
+            <div class="action-text">
+
+                <h4>Events</h4>
+
+                <p>Manage upcoming events</p>
+
+            </div>
+
+        </a>
+
+        <a
+            routerLink="/admin-dashboard/complaints"
+            class="action-card">
+
+            <div class="action-icon">
+                <i class="bi bi-exclamation-triangle-fill"></i>
+            </div>
+
+            <div class="action-text">
+
+                <h4>Complaints</h4>
+
+                <p>Review resident complaints</p>
+
+            </div>
+
+        </a>
+
+        <a
+            routerLink="/admin-dashboard/maintenance"
+            class="action-card">
+
+            <div class="action-icon">
+                <i class="bi bi-credit-card-fill"></i>
+            </div>
+
+            <div class="action-text">
+
+                <h4>Maintenance</h4>
+
+                <p>View maintenance records</p>
+
+            </div>
+
+        </a>
+
+    </div>
+
+</section>

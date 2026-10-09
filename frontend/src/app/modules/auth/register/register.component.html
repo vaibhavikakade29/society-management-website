@@ -1,0 +1,483 @@
+<div class="auth-container">
+
+  <!-- ================= LEFT PANEL ================= -->
+
+  <div class="left-panel">
+
+    <div class="logo">
+
+      <span class="logo-icon">🏢</span>
+
+      <div class="logo-text">
+
+        <h2>Vighnahar Residence</h2>
+
+        <p>Smart Society Management</p>
+
+      </div>
+
+    </div>
+
+    <img
+      src="assets/images/hero3.jpg"
+      alt="Society Building">
+
+    <div class="features">
+
+      <div>🔒 Secure & Safe Community</div>
+
+      <div>🏠 Manage Your Flat Easily</div>
+
+      <div>📢 Stay Updated with Notices</div>
+
+    </div>
+
+  </div>
+
+  <!-- ================= RIGHT PANEL ================= -->
+
+  <div class="right-panel">
+
+    <div class="form-box">
+
+      <h1>Create Account</h1>
+
+      <p>
+
+        Register to access your society portal.
+
+      </p>
+
+      <form
+        [formGroup]="registerForm"
+        (ngSubmit)="register()">
+
+        <!-- ================= FULL NAME ================= -->
+
+        <div class="form-group">
+
+          <label>Full Name</label>
+
+          <input
+            type="text"
+            formControlName="fullName"
+            placeholder="Enter Full Name">
+
+        </div>
+
+        <div
+          class="error"
+          *ngIf="registerForm.get('fullName')?.touched && registerForm.get('fullName')?.invalid">
+
+          <span *ngIf="registerForm.get('fullName')?.errors?.['required']">
+
+            Full Name is required.
+
+          </span>
+
+          <span *ngIf="registerForm.get('fullName')?.errors?.['pattern']">
+
+            Only alphabets and spaces are allowed.
+
+          </span>
+
+        </div>
+
+        <!-- ================= EMAIL ================= -->
+
+        <div class="form-group">
+
+          <label>Email Address</label>
+
+          <input
+            type="email"
+            formControlName="email"
+            placeholder="Enter Email Address">
+
+        </div>
+
+        <div
+          class="error"
+          *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid">
+
+          <span *ngIf="registerForm.get('email')?.errors?.['required']">
+
+            Email is required.
+
+          </span>
+
+          <span *ngIf="registerForm.get('email')?.errors?.['email']">
+
+            Enter a valid email address.
+
+          </span>
+
+        </div>
+
+        <!-- ================= PHONE ================= -->
+
+        <div class="form-group">
+
+          <label>Phone Number</label>
+
+          <input
+            type="text"
+            formControlName="phone"
+            placeholder="Enter Mobile Number">
+
+        </div>
+
+        <div
+          class="error"
+          *ngIf="registerForm.get('phone')?.touched && registerForm.get('phone')?.invalid">
+
+          <span *ngIf="registerForm.get('phone')?.errors?.['required']">
+
+            Mobile Number is required.
+
+          </span>
+
+          <span *ngIf="registerForm.get('phone')?.errors?.['pattern']">
+
+            Enter a valid 10-digit mobile number.
+
+          </span>
+
+        </div>
+
+        <!-- ================= USER TYPE ================= -->
+
+        <div class="form-group">
+
+          <label>User Type</label>
+
+          <select formControlName="userType">
+
+            <option value="">Select User Type</option>
+
+            <option value="owner">Owner</option>
+
+            <option value="tenant">Tenant</option>
+
+            <option value="family">Family Member</option>
+
+          </select>
+
+        </div>
+
+        <div
+          class="error"
+          *ngIf="registerForm.get('userType')?.touched && registerForm.get('userType')?.invalid">
+
+          User Type is required.
+
+        </div>
+
+        <!-- ================= OWNER ================= -->
+
+        <div
+          class="form-group"
+          *ngIf="registerForm.get('userType')?.value === 'owner'">
+
+          <label>Society Position</label>
+
+          <select formControlName="committeeRole">
+
+            <option value="Resident">Resident</option>
+
+            <option value="Chairman">Chairman</option>
+
+            <option value="Secretary">Secretary</option>
+
+            <option value="Treasurer">Treasurer</option>
+
+            <option value="Committee Member">Committee Member</option>
+
+          </select>
+
+        </div>
+
+        <!-- ================= TENANT ================= -->
+
+        <div
+          class="form-group"
+          *ngIf="registerForm.get('userType')?.value === 'tenant'">
+
+          <label>Owner Name</label>
+
+          <input
+            type="text"
+            formControlName="ownerName"
+            placeholder="Enter Owner Name">
+
+        </div>
+
+        <div
+          class="error"
+          *ngIf="registerForm.get('ownerName')?.touched && registerForm.get('ownerName')?.invalid">
+
+          Owner Name is required.
+
+        </div>
+
+        <!-- ================= FAMILY ================= -->
+
+        <div
+          class="form-group"
+          *ngIf="registerForm.get('userType')?.value === 'family'">
+
+          <label>Relationship</label>
+
+          <select formControlName="relationship">
+
+            <option value="">Select Relationship</option>
+
+            <option value="Father">Father</option>
+
+            <option value="Mother">Mother</option>
+
+            <option value="Brother">Brother</option>
+
+            <option value="Sister">Sister</option>
+
+            <option value="Spouse">Spouse</option>
+
+            <option value="Son">Son</option>
+
+            <option value="Daughter">Daughter</option>
+
+          </select>
+
+        </div>
+
+        <div
+          class="error"
+          *ngIf="registerForm.get('relationship')?.touched && registerForm.get('relationship')?.invalid">
+
+          Relationship is required.
+
+        </div>
+
+        <!-- ================= WING ================= -->
+
+        <div class="form-group">
+
+          <label>Wing</label>
+
+          <select
+            formControlName="wing"
+            (change)="onWingChange()">
+
+            <option value="">Select Wing</option>
+
+            <option
+              *ngFor="let wing of wings"
+              [value]="wing">
+
+              Wing {{ wing }}
+
+            </option>
+
+          </select>
+
+        </div>
+
+        <div
+          class="error"
+          *ngIf="registerForm.get('wing')?.touched && registerForm.get('wing')?.invalid">
+
+          Wing is required.
+
+        </div>
+
+        <!-- ================= FLAT ================= -->
+
+        <div class="form-group">
+
+          <label>Flat Number</label>
+
+          <select formControlName="flatNo">
+
+            <option value="">Select Flat Number</option>
+
+            <option
+              *ngFor="let flat of flatNumbers"
+              [value]="flat">
+
+              {{ flat }}
+
+            </option>
+
+          </select>
+
+        </div>
+
+        <div
+          class="error"
+          *ngIf="registerForm.get('flatNo')?.touched && registerForm.get('flatNo')?.invalid">
+
+          Flat Number is required.
+
+        </div>
+                <!-- ================= EMERGENCY CONTACT NAME ================= -->
+
+        <div class="form-group">
+
+          <label>Emergency Contact Name</label>
+
+          <input
+            type="text"
+            formControlName="emergencyContactName"
+            placeholder="Enter Emergency Contact Name">
+
+        </div>
+
+        <div
+          class="error"
+          *ngIf="registerForm.get('emergencyContactName')?.touched &&
+                 registerForm.get('emergencyContactName')?.invalid">
+
+          <span *ngIf="registerForm.get('emergencyContactName')?.errors?.['required']">
+
+            Emergency Contact Name is required.
+
+          </span>
+
+        </div>
+
+        <!-- ================= EMERGENCY CONTACT NUMBER ================= -->
+
+        <div class="form-group">
+
+          <label>Emergency Contact Number</label>
+
+          <input
+            type="text"
+            formControlName="emergencyContactNumber"
+            placeholder="Enter Emergency Contact Number">
+
+        </div>
+
+        <div
+          class="error"
+          *ngIf="registerForm.get('emergencyContactNumber')?.touched &&
+                 registerForm.get('emergencyContactNumber')?.invalid">
+
+          <span *ngIf="registerForm.get('emergencyContactNumber')?.errors?.['required']">
+
+            Emergency Contact Number is required.
+
+          </span>
+
+          <span *ngIf="registerForm.get('emergencyContactNumber')?.errors?.['pattern']">
+
+            Enter a valid 10-digit emergency contact number.
+
+          </span>
+
+        </div>
+
+        <!-- ================= PASSWORD ================= -->
+
+        <div class="form-group">
+
+          <label>Password</label>
+
+          <input
+            type="password"
+            formControlName="password"
+            placeholder="Create Password">
+
+        </div>
+
+        <div
+          class="error"
+          *ngIf="registerForm.get('password')?.touched &&
+                 registerForm.get('password')?.invalid">
+
+          <span *ngIf="registerForm.get('password')?.errors?.['required']">
+
+            Password is required.
+
+          </span>
+
+          <span *ngIf="registerForm.get('password')?.errors?.['pattern']">
+
+            Password must contain:
+            <br>
+            • Minimum 8 characters
+            <br>
+            • One uppercase letter
+            <br>
+            • One lowercase letter
+            <br>
+            • One number
+            <br>
+            • One special character
+
+          </span>
+
+        </div>
+
+        <!-- ================= CONFIRM PASSWORD ================= -->
+
+        <div class="form-group">
+
+          <label>Confirm Password</label>
+
+          <input
+            type="password"
+            formControlName="confirmPassword"
+            placeholder="Confirm Password">
+
+        </div>
+
+        <div
+          class="error"
+          *ngIf="registerForm.get('confirmPassword')?.touched &&
+                 registerForm.get('confirmPassword')?.errors?.['required']">
+
+          Confirm Password is required.
+
+        </div>
+
+        <div
+          class="error"
+          *ngIf="registerForm.hasError('passwordMismatch') &&
+                 registerForm.get('confirmPassword')?.touched">
+
+          Password and Confirm Password must match.
+
+        </div>
+
+        <!-- ================= SUBMIT BUTTON ================= -->
+
+        <button
+          type="submit"
+          class="register-btn">
+
+          Create Account
+
+        </button>
+
+      </form>
+
+      <!-- ================= LOGIN LINK ================= -->
+
+      <p class="bottom-text">
+
+        Already have an account?
+
+        <a routerLink="/auth/login">
+
+          Login Now
+
+        </a>
+
+      </p>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,173 @@
+<div class="page">
+
+    <!-- Heading -->
+    <div class="page-header">
+        <h2>📝 Raise Complaint</h2>
+        <p>Report any issue related to your society. The management team will review and update the status.</p>
+    </div>
+
+    <!-- Messages -->
+
+    <div class="success-message" *ngIf="successMessage">
+        {{ successMessage }}
+    </div>
+
+    <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+    </div>
+
+    <!-- Complaint Form -->
+
+    <div class="complaint-form">
+
+        <div class="form-row">
+
+            <div class="form-group">
+
+                <label>Category</label>
+
+                <select [(ngModel)]="complaint.category">
+
+                    <option value="">Select Category</option>
+                    <option value="Electrical">Electrical</option>
+                    <option value="Plumbing">Plumbing</option>
+                    <option value="Lift">Lift</option>
+                    <option value="Security">Security</option>
+                    <option value="Cleaning">Cleaning</option>
+                    <option value="Water">Water</option>
+                    <option value="Other">Other</option>
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Priority</label>
+
+                <select [(ngModel)]="complaint.priority">
+
+                    <option value="">Select Priority</option>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Description</label>
+
+            <textarea
+                rows="6"
+                placeholder="Describe your complaint in detail..."
+                [(ngModel)]="complaint.description">
+            </textarea>
+
+        </div>
+
+        <button
+            class="submit-btn"
+            (click)="submitComplaint()">
+
+            Submit Complaint
+
+        </button>
+
+    </div>
+
+    <!-- Complaint History -->
+
+    <div class="my-complaints">
+
+        <h3>My Complaints</h3>
+
+        <table *ngIf="myComplaints.length > 0">
+
+            <thead>
+
+                <tr>
+
+                    <th>Category</th>
+                    <th>Priority</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Admin Remarks</th>
+                    <th>Date</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr *ngFor="let complaint of myComplaints">
+
+                    <td>{{ complaint.category }}</td>
+
+                    <td>
+
+                        <span
+                            [class.low]="complaint.priority=='Low'"
+                            [class.medium]="complaint.priority=='Medium'"
+                            [class.high]="complaint.priority=='High'">
+
+                            {{ complaint.priority }}
+
+                        </span>
+
+                    </td>
+
+                    <td class="description">
+
+                        {{ complaint.description }}
+
+                    </td>
+
+                    <td>
+
+                        <span
+                          [class.status-pending]="complaint.status === 'Pending'"
+                          [class.status-progress]="complaint.status === 'In Progress'"
+                          [class.status-resolved]="complaint.status === 'Resolved'"
+                          [class.status-rejected]="complaint.status === 'Rejected'">
+
+                          {{ complaint.status }}
+
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        {{ complaint.adminRemarks || '-' }}
+
+                    </td>
+
+                    <td>
+
+                        {{ complaint.createdAt | date:'dd/MM/yyyy' }}
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+        <div
+            class="empty-state"
+            *ngIf="myComplaints.length==0">
+
+            No complaints submitted yet.
+
+        </div>
+
+    </div>
+
+</div>

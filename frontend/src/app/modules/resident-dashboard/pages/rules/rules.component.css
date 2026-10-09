@@ -1,0 +1,387 @@
+/* MAIN CONTAINER */
+.rules-container {
+    padding: 25px;
+    background: #f6f8fc;
+    min-height: 100%;
+    font-family: 'Times New Roman', Times, serif;
+}
+/* ==========================================================
+   PAGE HEADER
+========================================================== */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+
+}
+
+
+
+.page-header h2 {
+
+    margin: 0;
+
+    font-size: 26px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 700;
+
+    color: #1f2937;
+
+}
+
+
+
+.page-header h2 i {
+
+    color: #2563eb;
+
+    margin-right: 8px;
+
+}
+
+
+
+.page-header p {
+
+    margin-top: 8px;
+
+    color: #6b7280;
+
+    font-size: 15px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+
+
+
+
+
+
+/* ==========================================================
+   FILTER SECTION
+========================================================== */
+
+
+.filter-card {
+
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 15px;
+
+    display: flex;
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+
+    0 5px 20px rgba(0,0,0,0.06);
+
+}
+
+
+
+.filter-card input,
+
+.filter-card select {
+
+
+    flex: 1;
+
+    padding: 12px 14px;
+
+    border-radius: 8px;
+
+    border: 1px solid #d1d5db;
+
+    outline: none;
+
+    font-size: 14px;
+    font-family: 'Times New Roman', Times, serif;
+    background: white;
+
+}
+
+
+
+.filter-card input:focus,
+
+.filter-card select:focus {
+
+
+    border-color: #2563eb;
+
+    box-shadow:
+
+    0 0 0 2px rgba(37,99,235,0.15);
+
+}
+
+
+
+
+
+
+
+/* ==========================================================
+   RULE GRID
+========================================================== */
+
+
+.rules-grid {
+
+
+    display: grid;
+
+    grid-template-columns:
+
+    repeat(3,1fr);
+
+    gap: 20px;
+
+}
+
+
+
+
+
+
+
+/* ==========================================================
+   RULE CARD
+========================================================== */
+
+
+.rule-card {
+
+
+    background:white;
+
+    padding:22px;
+
+    border-radius:16px;
+
+    position:relative;
+
+    box-shadow:
+
+    0 5px 20px rgba(0,0,0,0.06);
+
+    transition:0.3s;
+
+}
+
+
+
+.rule-card:hover {
+
+
+    transform:translateY(-5px);
+
+    box-shadow:
+
+    0 10px 25px rgba(0,0,0,0.1);
+
+}
+
+
+
+.rule-card h3 {
+
+
+    margin-top:10px;
+
+    margin-bottom:12px;
+
+    color:#111827;
+    font-family: 'Times New Roman', Times, serif;
+    font-size:19px;
+
+}
+
+
+
+.rule-card p {
+
+
+    color:#6b7280;
+
+    line-height:1.7;
+
+    font-size:14px;
+    font-family: 'Times New Roman', Times, serif;
+    min-height:70px;
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================================
+   PIN BADGE
+========================================================== */
+
+
+.pin {
+
+
+    position:absolute;
+
+    top:15px;
+
+    right:15px;
+
+
+    background:#f59e0b;
+
+    color:white;
+
+
+    padding:6px 12px;
+
+    border-radius:20px;
+
+
+    font-size:12px;
+    font-family: 'Times New Roman', Times, serif;
+    display:flex;
+
+    align-items:center;
+
+    gap:5px;
+
+}
+
+
+
+
+
+
+
+/* ==========================================================
+   META INFORMATION
+========================================================== */
+
+
+.rule-meta {
+
+
+    display:flex;
+
+    gap:10px;
+
+    margin-top:18px;
+
+}
+
+
+
+
+
+.category,
+
+.priority {
+
+
+    padding:6px 14px;
+
+    border-radius:20px;
+
+    font-size:13px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight:600;
+
+}
+
+
+
+
+
+.category {
+
+
+    background:#e0f2fe;
+
+    color:#0369a1;
+
+}
+/* ==========================================================
+   PRIORITY COLORS
+========================================================== */
+.high {
+    background:#fee2e2;
+    color:#dc2626;
+}
+.normal {
+    background:#dcfce7;
+    color:#15803d;
+}
+.low {
+    background:#fef3c7;
+    color:#b45309;
+}
+/* ==========================================================
+   FOOTER
+========================================================== */
+.rule-footer {
+    margin-top:20px;
+    padding-top:15px;
+    border-top:1px solid #e5e7eb;
+}
+.rule-footer small {
+    color:#6b7280;
+    font-size:13px;
+    font-family: 'Times New Roman', Times, serif;
+}
+/* ==========================================================
+   EMPTY STATE
+========================================================== */
+.empty {
+    font-family: 'Times New Roman', Times, serif;
+    text-align:center;
+    padding:60px 20px;
+    color:#6b7280;
+}
+.empty i {
+    font-size:65px;
+    font-family: 'Times New Roman', Times, serif;
+    color:#9ca3af;
+}
+.empty h3 {
+    margin-top:15px;
+    color:#374151;
+}
+/* ==========================================================
+   RESPONSIVE DESIGN
+========================================================== */
+@media(max-width:1100px){
+    .rules-grid {
+        grid-template-columns:
+        repeat(2,1fr);
+    }
+}
+@media(max-width:750px){
+    .rules-container {
+        padding:15px;
+    }
+    .page-header {
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
+    }
+    .filter-card {
+        flex-direction:column;
+    }
+    .rules-grid {
+        grid-template-columns:1fr;
+
+    }
+}

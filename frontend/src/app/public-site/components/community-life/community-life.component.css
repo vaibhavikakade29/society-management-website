@@ -1,0 +1,107 @@
+.community-section {
+  padding: 100px 0;
+  background: linear-gradient(180deg, #f8fafc, #eef4ff);
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.section-heading {
+  text-align: center;
+  margin-bottom: 60px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.section-heading h2 {
+  font-size: 38px;
+  font-weight: 700;
+  color: #0d3b75;
+  font-family: 'Times New Roman', Times, serif;
+  position: relative;
+  display: inline-block;
+}
+
+.section-heading h2::after {
+  content: "";
+  width: 60%;
+  height: 4px;
+  background: linear-gradient(90deg, #1c5db6, #92b4de);
+  position: absolute;
+  left: 20%;
+  bottom: -10px;
+  border-radius: 10px;
+}
+
+.section-heading p {
+  max-width: 750px;
+  margin: 20px auto 0;
+  color: #000000;
+  font-size: 17px;
+  font-family: 'Times New Roman', Times, serif;
+  line-height: 1.6;
+}
+
+.event-card {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  padding: 40px 20px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  transition: all 0.4s ease;
+  height: 100%;
+  
+  border: 1px solid rgba(0,0,0,0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.event-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(28,93,182,0.15), transparent 60%);
+  transform: scale(0);
+  transition: transform 0.5s ease;
+}
+
+.event-card:hover::before {
+  transform: scale(1);
+}
+
+.event-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 20px 40px rgba(28, 93, 182, 0.25);
+}
+
+.icon-box {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 15px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1c5db6, #92b4de);
+  box-shadow: 0 8px 20px rgba(28, 93, 182, 0.3);
+}
+
+.icon-box mat-icon {
+  font-size: 34px;
+  width: 34px;
+  height: 34px;
+  color: white;
+}
+
+.event-card h4 {
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #0d3b75;
+  font-family: 'Poppins', sans-serif;
+}
+
+.event-card:hover h4 {
+  color: #1c5db6;
+}

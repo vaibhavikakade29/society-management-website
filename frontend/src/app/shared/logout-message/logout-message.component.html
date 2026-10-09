@@ -1,0 +1,57 @@
+<div class="logout-page">
+
+    <!-- Floating Background -->
+
+    <div class="circle circle1"></div>
+    <div class="circle circle2"></div>
+    <div class="circle circle3"></div>
+
+    <!-- Card -->
+
+    <div class="logout-card">
+
+        <!-- Success Tick -->
+
+        <div class="success-icon">
+
+            ✓
+
+        </div>
+
+        <!-- Material Icon -->
+
+        <div class="home-icon">
+
+            <mat-icon>{{ icon }}</mat-icon>
+
+        </div>
+
+        <h2>{{ title }}</h2>
+
+        <p>
+
+            {{ message }}
+
+        </p>
+
+        <!-- Progress -->
+
+        <div class="progress-bar">
+
+            <div
+                class="progress-fill"
+                [style.width.%]="progress">
+
+            </div>
+
+        </div>
+
+        <span class="redirect">
+
+            {{ redirectText }}
+
+        </span>
+
+    </div>
+
+</div>

@@ -1,0 +1,571 @@
+<div class="page">
+
+  <h2>💰 Maintenance Management</h2>
+
+  <!-- Success -->
+  <div
+    class="success-message"
+    *ngIf="successMessage">
+
+    {{ successMessage }}
+
+  </div>
+
+  <!-- Error -->
+  <div
+    class="error-message"
+    *ngIf="errorMessage">
+
+    {{ errorMessage }}
+
+  </div>
+
+  <!-- Statistics -->
+
+  <div class="stats-container">
+
+    <div class="stat-card">
+
+      <h3>{{ totalBills }}</h3>
+
+      <p>Total Bills</p>
+
+    </div>
+
+    <div class="stat-card">
+
+      <h3>{{ pendingBills }}</h3>
+
+      <p>Pending Bills</p>
+
+    </div>
+
+    <div class="stat-card">
+
+      <h3>{{ paidBills }}</h3>
+
+      <p>Paid Bills</p>
+
+    </div>
+
+    <div class="stat-card">
+
+      <h3>₹ {{ totalCollection }}</h3>
+
+      <p>Total Collection</p>
+
+    </div>
+
+  </div>
+
+  <!-- Generate Bill -->
+
+  <div class="maintenance-form">
+
+    <h3>Generate Maintenance Bill</h3>
+
+    <label>Resident</label>
+
+    <select
+
+      [(ngModel)]="bill.residentId"
+
+      (change)="onResidentChange()">
+
+      <option value="">Select Resident</option>
+
+      <option
+
+        *ngFor="let resident of residents"
+
+        [value]="resident._id">
+
+        {{ resident.fullName }}
+
+        ({{ resident.flatNo }})
+
+      </option>
+
+    </select>
+
+    <label>Flat Number</label>
+
+    <input
+
+      type="text"
+
+      [(ngModel)]="bill.flatNo"
+
+      readonly>
+
+    <label>Bill Month</label>
+
+    <select
+
+      [(ngModel)]="bill.billMonth">
+
+      <option value="">Select Month</option>
+
+      <option>January</option>
+      <option>February</option>
+      <option>March</option>
+      <option>April</option>
+      <option>May</option>
+      <option>June</option>
+      <option>July</option>
+      <option>August</option>
+      <option>September</option>
+      <option>October</option>
+      <option>November</option>
+      <option>December</option>
+
+    </select>
+
+    <label>Bill Year</label>
+
+    <input
+
+      type="number"
+
+      [(ngModel)]="bill.billYear">
+
+    <label>Maintenance Amount</label>
+
+    <input
+
+      type="number"
+
+      [(ngModel)]="bill.maintenanceAmount">
+
+    <label>Due Date</label>
+
+    <input
+
+      type="date"
+
+      [(ngModel)]="bill.dueDate">
+
+    <label>Remarks</label>
+
+    <textarea
+
+      rows="4"
+
+      [(ngModel)]="bill.remarks">
+
+    </textarea>
+
+    <button
+
+      class="generate-btn"
+
+      (click)="generateBill()">
+
+      Generate Bill
+
+    </button>
+
+  </div>
+
+  <hr>
+
+  <!-- Search -->
+
+  <div class="search-box">
+
+    <input
+
+      type="text"
+
+      placeholder="Search by Resident or Flat"
+
+      [(ngModel)]="searchText"
+
+      (input)="searchBill()">
+
+  </div>
+    <!-- Bills Table -->
+
+  <div class="bill-list">
+
+  <h3>Maintenance Bills</h3>
+
+  <table *ngIf="filteredBills.length > 0">
+
+    <thead>
+
+      <tr>
+
+        <th>Resident</th>
+<th>Flat</th>
+<th>Month</th>
+<th>Year</th>
+<th>Amount</th>
+<th>Payment Mode</th>
+<th>Status</th>
+<th>Due Date</th>
+<th>Verification</th>
+<th>Actions</th>
+
+      </tr>
+
+    </thead>
+
+    <tbody>
+
+      <tr *ngFor="let bill of filteredBills">
+
+  <td>{{ bill.residentName }}</td>
+
+  <td>{{ bill.flatNo }}</td>
+
+  <td>{{ bill.billMonth }}</td>
+
+  <td>{{ bill.billYear }}</td>
+
+  <td>₹ {{ bill.maintenanceAmount }}</td>
+
+  <td>
+
+    {{ bill.paymentMode || "--" }}
+
+  </td>
+
+  <td>
+
+    <span
+      class="status"
+      [class.pending]="bill.status=='Pending'"
+      [class.verification]="bill.status=='Payment Verification'"
+      [class.cash]="bill.status=='Cash Pending'"
+      [class.paid]="bill.status=='Paid'"
+      [class.rejected]="bill.status=='Rejected'">
+
+      {{ bill.status }}
+
+    </span>
+
+  </td>
+
+  <td>
+
+    {{ bill.dueDate | date:'dd/MM/yyyy' }}
+
+  </td>
+
+  <td>
+
+    <!-- Pending -->
+
+    <span *ngIf="bill.status=='Pending'">
+
+      --
+
+    </span>
+
+    <!-- Online Payment -->
+
+    <div *ngIf="bill.status=='Payment Verification'">
+
+      <button
+        class="verify-btn"
+        (click)="approvePayment(bill)">
+
+        Verify
+
+      </button>
+
+      <button
+        class="reject-btn"
+        (click)="rejectPayment(bill)">
+
+        Reject
+
+      </button>
+
+    </div>
+
+    <!-- Cash -->
+
+    <div *ngIf="bill.status=='Cash Pending'">
+
+      <button
+        class="verify-btn"
+        (click)="approvePayment(bill._id)">
+
+        Confirm Cash
+
+      </button>
+
+      <button
+        class="reject-btn"
+        (click)="rejectPayment(bill._id)">
+
+        Reject
+
+      </button>
+
+    </div>
+
+    <!-- Paid -->
+
+    <span
+      *ngIf="bill.status=='Paid'"
+      style="color:green;font-weight:bold;">
+
+      ✅ Paid
+
+    </span>
+
+    <!-- Rejected -->
+
+    <span
+      *ngIf="bill.status=='Rejected'"
+      style="color:red;font-weight:bold;">
+
+      ❌ Rejected
+
+    </span>
+
+  </td>
+
+ <td>
+
+<div class="action-buttons">
+
+<button
+class="view-btn"
+(click)="viewBill(bill)">
+
+View
+
+</button>
+
+<button
+class="edit-btn"
+(click)="editMaintenanceBill(bill)">
+
+Edit
+
+</button>
+
+<button
+class="delete-btn"
+(click)="openDeleteModal(bill._id)">
+
+Delete
+
+</button>
+
+</div>
+
+</td>
+</tr>
+    </tbody>
+
+  </table>
+
+  <p *ngIf="filteredBills.length==0">
+
+    No Maintenance Bills Found.
+
+  </p>
+
+</div>
+  <!-- ==========================================
+View Bill Modal
+========================================== -->
+
+<div
+  class="modal"
+  *ngIf="selectedBill">
+
+  <div class="modal-content">
+
+    <h2>Maintenance Bill Details</h2>
+
+    <p>
+
+  <strong>Resident :</strong>
+
+  {{ selectedBill.residentName }}
+
+</p>
+
+<p>
+
+  <strong>Flat :</strong>
+
+  {{ selectedBill.flatNo }}
+
+</p>
+
+<p>
+
+  <strong>Bill :</strong>
+
+  {{ selectedBill.billMonth }}
+
+  {{ selectedBill.billYear }}
+
+</p>
+
+<p>
+
+  <strong>Amount :</strong>
+
+  ₹ {{ selectedBill.maintenanceAmount }}
+
+</p>
+
+<p>
+
+  <strong>Status :</strong>
+
+  {{ selectedBill.status }}
+
+</p>
+
+<p>
+
+  <strong>Payment Mode :</strong>
+
+  {{ selectedBill.paymentMode || '--' }}
+
+</p>
+
+<p>
+
+  <strong>Transaction ID :</strong>
+
+  {{ selectedBill.transactionId || '--' }}
+
+</p>
+
+<p>
+
+  <strong>Due Date :</strong>
+
+  {{ selectedBill.dueDate | date:'dd/MM/yyyy' }}
+
+</p>
+
+<p>
+
+  <strong>Remarks :</strong>
+
+  {{ selectedBill.remarks }}
+
+</p>
+
+<button
+
+  class="close-btn"
+
+  (click)="closeBill()">
+
+  Close
+
+</button>
+    
+
+  </div>
+
+</div>
+
+<!-- ==========================================
+Delete Modal
+========================================== -->
+
+<div
+  class="modal"
+  *ngIf="showDeleteModal">
+
+  <div class="modal-content">
+
+    <h2>Delete Maintenance Bill</h2>
+
+    <p>
+
+      Are you sure you want to delete this bill?
+
+    </p>
+
+    <button
+
+      class="delete-btn"
+
+      (click)="confirmDelete()">
+
+      Yes, Delete
+
+    </button>
+
+    <button
+
+      class="close-btn"
+
+      (click)="cancelDelete()">
+
+      Cancel
+
+    </button>
+
+  </div>
+
+</div>
+<!-- ==========================================
+Edit Bill Modal
+========================================== -->
+
+<div
+  class="modal"
+  *ngIf="editingBill">
+
+  <div class="modal-content">
+
+    <h2>Edit Maintenance Bill</h2>
+
+    <label>Maintenance Amount</label>
+
+    <input
+      type="number"
+      [(ngModel)]="editBill.maintenanceAmount">
+
+    <label>Due Date</label>
+
+    <input
+      type="date"
+      [(ngModel)]="editBill.dueDate">
+
+    <label>Remarks</label>
+
+    <textarea
+      rows="4"
+      [(ngModel)]="editBill.remarks">
+
+    </textarea>
+
+    <div class="button-group">
+
+      <button
+        class="generate-btn"
+        (click)="updateBill()">
+
+        Save Changes
+
+      </button>
+
+      <button
+        class="close-btn"
+        (click)="closeEditModal()">
+
+        Cancel
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

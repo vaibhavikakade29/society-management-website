@@ -1,0 +1,380 @@
+<div class="page">
+
+  <h2>📢 Notices Management</h2>
+
+  <!-- Success Message -->
+
+  <div
+    class="success-message"
+    *ngIf="successMessage">
+
+    {{ successMessage }}
+
+  </div>
+
+  <!-- Error Message -->
+
+  <div
+    class="error-message"
+    *ngIf="errorMessage">
+
+    {{ errorMessage }}
+
+  </div>
+
+  <!-- Statistics -->
+
+  <div class="stats-container">
+
+    <div class="stat-card">
+      <h3>{{ totalNotices }}</h3>
+      <p>Total Notices</p>
+    </div>
+
+    <div class="stat-card">
+      <h3>{{ activeNotices }}</h3>
+      <p>Active Notices</p>
+    </div>
+
+    <div class="stat-card">
+      <h3>{{ expiredNotices }}</h3>
+      <p>Expired Notices</p>
+    </div>
+
+  </div>
+
+  <!-- Notice Form -->
+
+  <div class="notice-form">
+
+    <h3>
+      {{ isEditMode ? 'Edit Notice' : 'Create Notice' }}
+    </h3>
+
+    <input
+      type="text"
+      placeholder="Notice Title"
+      [(ngModel)]="notice.title">
+
+    <textarea
+      rows="4"
+      placeholder="Notice Description"
+      [(ngModel)]="notice.description">
+    </textarea>
+
+    <select [(ngModel)]="notice.noticeType">
+
+      <option value="">
+        Select Notice Type
+      </option>
+
+      <option value="Maintenance">
+        Maintenance
+      </option>
+
+      <option value="Meeting">
+        Meeting
+      </option>
+
+      <option value="Festival">
+        Festival
+      </option>
+
+      <option value="Emergency">
+        Emergency
+      </option>
+
+      <option value="General">
+        General
+      </option>
+
+    </select>
+    <select [(ngModel)]="notice.priority">
+
+  <option value="">
+    Select Priority
+  </option>
+
+  <option value="High">
+    High
+  </option>
+
+  <option value="Medium">
+    Medium
+  </option>
+
+  <option value="Low">
+    Low
+  </option>
+
+</select>
+    <select [(ngModel)]="notice.visibleTo">
+
+      <option value="">
+        Visible To
+      </option>
+
+      <option value="all">
+        All Residents
+      </option>
+
+      <option value="owner">
+        Owners Only
+      </option>
+
+      <option value="tenant">
+        Tenants Only
+      </option>
+
+      <option value="A">
+        Wing A
+      </option>
+
+      <option value="B">
+        Wing B
+      </option>
+
+      <option value="C">
+        Wing C
+      </option>
+
+      <option value="D">
+        Wing D
+      </option>
+
+      <option value="E">
+        Wing E
+      </option>
+
+      <option value="F">
+        Wing F
+      </option>
+
+      <option value="G">
+        Wing G
+      </option>
+
+    </select>
+
+    <input
+      type="date"
+      [(ngModel)]="notice.expiryDate">
+
+    <button
+      *ngIf="!isEditMode"
+      class="publish-btn"
+      (click)="publishNotice()">
+
+      Publish Notice
+
+    </button>
+
+    <button
+      *ngIf="isEditMode"
+      class="publish-btn"
+      (click)="updateNotice()">
+
+      Update Notice
+
+    </button>
+
+  </div>
+
+  <!-- Search -->
+
+  <div class="search-box">
+
+    <input
+      type="text"
+      placeholder="Search Notice by Title or Type"
+      [(ngModel)]="searchText"
+      (input)="searchNotice()">
+
+  </div>
+
+  <!-- Notice List -->
+
+  <div class="notice-list">
+
+    <h3>Published Notices</h3>
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>Title</th>
+          <th>Type</th>
+          <th>Visible To</th>
+          <th>Status</th>
+          <th>Created By</th>
+          <th>Created Date</th>
+          <th>Expiry Date</th>
+          <th>Actions</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <tr *ngFor="let notice of filteredNotices">
+
+          <td>{{ notice.title }}</td>
+
+          <td>{{ notice.noticeType }}</td>
+
+          <td>{{ notice.visibleTo }}</td>
+
+          <td>
+
+            <span
+              [class.active]="getStatus(notice.expiryDate) === 'Active'"
+              [class.expired]="getStatus(notice.expiryDate) === 'Expired'">
+
+              {{ getStatus(notice.expiryDate) }}
+
+            </span>
+
+          </td>
+
+          <td>{{ notice.createdBy?.fullName }}</td>
+
+          <td>{{ notice.createdAt | date:'medium' }}</td>
+
+          <td>{{ notice.expiryDate }}</td>
+
+          <td>
+
+            <button
+              class="view-btn"
+              (click)="viewNotice(notice)">
+
+              View
+
+            </button>
+
+            <button
+              class="edit-btn"
+              (click)="editNotice(notice)">
+
+              Edit
+
+            </button>
+
+            <button
+              class="delete-btn"
+              (click)="openDeleteModal(notice._id)">
+
+              Delete
+
+            </button>
+
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
+
+<!-- View Notice Modal -->
+
+<div
+  class="modal"
+  *ngIf="selectedNotice">
+
+  <div class="modal-content">
+
+    <h2>📢 Notice Details</h2>
+
+    <p>
+      <strong>Title:</strong>
+      {{ selectedNotice.title }}
+    </p>
+
+    <p>
+      <strong>Description:</strong>
+      {{ selectedNotice.description }}
+    </p>
+
+    <p>
+      <strong>Type:</strong>
+      {{ selectedNotice.noticeType }}
+    </p>
+
+    <p>
+      <strong>Visible To:</strong>
+      {{ selectedNotice.visibleTo }}
+    </p>
+
+    <p>
+     <strong>Created By:</strong> 
+     {{ selectedNotice.createdBy?.fullName }}
+    </p>
+
+    <p>
+      <strong>Created Date:</strong>
+      {{ selectedNotice.createdDate }}
+    </p>
+
+    <p>
+      <strong>Expiry Date:</strong>
+      {{ selectedNotice.expiryDate }}
+    </p>
+
+    <p>
+      <strong>Status:</strong>
+      {{ getStatus(selectedNotice.expiryDate) }}
+    </p>
+
+    <button
+      class="close-btn"
+      (click)="closeNotice()">
+
+      Close
+
+    </button>
+
+  </div>
+
+</div>
+
+<!-- Delete Confirmation Modal -->
+
+<div
+  class="modal"
+  *ngIf="showDeleteModal">
+
+  <div class="modal-content">
+
+    <h2>Delete Notice</h2>
+
+    <p>
+      Are you sure you want to delete this notice?
+    </p>
+
+    <button
+      class="delete-btn"
+      (click)="confirmDelete()">
+
+      Yes Delete
+
+    </button>
+
+    <button
+      class="close-btn"
+      (click)="cancelDelete()">
+
+      Cancel
+
+    </button>
+
+  </div>
+
+</div>

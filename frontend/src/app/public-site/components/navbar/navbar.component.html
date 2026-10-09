@@ -1,0 +1,165 @@
+<nav class="navbar navbar-expand-lg custom-navbar">
+
+  <div class="container">
+
+    <!-- Logo -->
+
+    <a
+      class="navbar-brand"
+      (click)="navigateWithLoader(
+        '/',
+        'Welcome Home',
+        'Opening Home Page...',
+        'home'
+      )">
+
+      <i class="fas fa-building"></i>
+
+      Vighnahar Residence
+
+    </a>
+
+    <!-- Mobile Toggle -->
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarContent">
+
+      <i class="fas fa-bars"></i>
+
+    </button>
+
+    <!-- Navbar -->
+
+    <div class="collapse navbar-collapse" id="navbarContent">
+
+      <ul class="navbar-nav ms-auto">
+
+        <!-- Home -->
+
+        <li class="nav-item">
+
+          <a
+            class="nav-link"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            (click)="navigateWithLoader(
+              '/',
+              'Welcome Home',
+              'Opening Home Page...',
+              'home'
+            )">
+
+            Home
+
+          </a>
+
+        </li>
+
+        <!-- About -->
+
+        <li class="nav-item">
+
+          <a
+            class="nav-link"
+            routerLinkActive="active"
+            (click)="navigateWithLoader(
+              '/about',
+              '🏢 Vighnahar Residence',
+              'Discovering Our Community...',
+              'apartment'
+            )">
+
+            About
+
+          </a>
+
+        </li>
+
+        <!-- Amenities -->
+
+        <li class="nav-item">
+
+          <a
+            class="nav-link"
+            routerLinkActive="active"
+            (click)="navigateWithLoader(
+              '/amenities',
+              '🌿 Premium Amenities',
+              'Loading Facilities...',
+              'pool'
+            )">
+
+            Amenities
+
+          </a>
+
+        </li>
+
+        <!-- Community -->
+
+        <li class="nav-item">
+
+          <a
+            class="nav-link"
+            routerLinkActive="active"
+            (click)="navigateWithLoader(
+              '/community-life',
+              '🎉 Community Life',
+              'Opening Events & Activities...',
+              'celebration'
+            )">
+
+            Community Life
+
+          </a>
+
+        </li>
+
+        <!-- Contact -->
+
+        <li class="nav-item">
+
+          <a
+            class="nav-link"
+            routerLinkActive="active"
+            (click)="navigateWithLoader(
+              '/contact',
+              '📞 Contact Us',
+              'Connecting You...',
+              'call'
+            )">
+
+            Contact
+
+          </a>
+
+        </li>
+
+      </ul>
+
+      <!-- Resident Portal -->
+
+      <button
+        type="button"
+        class="auth-btn"
+        (click)="navigateWithLoader(
+          '/auth/login',
+          '🔐 Resident Portal',
+          'Preparing Secure Login...',
+          'login'
+        )">
+
+        <i class="fas fa-user"></i>
+
+        Resident Portal
+
+      </button>
+
+    </div>
+
+  </div>
+
+</nav>

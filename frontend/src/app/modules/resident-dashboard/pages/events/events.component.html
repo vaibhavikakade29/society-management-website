@@ -1,0 +1,28 @@
+<div class="resident-wrapper">
+
+  <h2>🏡 Society Events</h2><br>
+  <p>Stay updated with upcoming events</p>
+
+  <div class="event-grid">
+
+    <div class="card" *ngFor="let e of events">
+
+      <h3>{{ e.title }}</h3>
+
+      <p class="desc">{{ e.description }}</p>
+
+      <div class="info">
+        <span>📍 {{ e.location }}</span>
+        <span>📅 {{ e.eventDate | date }}</span>
+        <span>⏰ {{ e.eventTime }}</span><br>
+      </div>
+
+      <div class="status">
+        <span>{{ e.status }}</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

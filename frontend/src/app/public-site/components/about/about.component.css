@@ -1,0 +1,373 @@
+
+
+/* ====================================
+   Common Section Styling
+==================================== */
+
+.about-section,
+.vision-section {
+  padding: 100px 0;
+}
+
+.section-title {
+  display: inline-block;
+
+  color: #C89B3C;
+
+  font-size: 30px;
+  font-weight: 600;
+    font-family: 'Times New Roman', Times, serif;
+  letter-spacing: 3px;
+
+  margin-bottom: 15px;
+}
+
+.about-section h2,
+.vision-section h2 {
+  font-size: 24px;
+
+  color: #0d3b75;
+
+  font-family: 'Times New Roman', Times, serif;
+
+  margin-bottom: 25px;
+}
+
+.about-section p,
+.vision-section p {
+  color: #555;
+
+  font-size: 18px;
+
+  line-height: 1.9;
+
+  margin-bottom: 18px;
+}
+
+/* ====================================
+   Images
+==================================== */
+
+.section-image {
+  width: 100%;
+
+  border-radius: 20px;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+
+  transition: 0.4s;
+}
+
+.section-image:hover {
+  transform: scale(1.03);
+}
+
+/* ====================================
+   Why Choose Us
+==================================== */
+
+.why-us-section {
+  padding: 100px 0;
+
+  background: #f8f9fc;
+}
+
+.section-heading {
+  text-align: center;
+
+  margin-bottom: 60px;
+}
+
+.section-heading span {
+  color: #C89B3C;
+
+  font-size: 14px;
+
+  letter-spacing: 3px;
+
+  font-weight: 600;
+}
+
+.section-heading h2 {
+  font-size: 46px;
+
+  color: #0d3b75;
+
+  margin-top: 15px;
+
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.feature-card {
+  background: white;
+
+  text-align: center;
+
+  padding: 35px 25px;
+
+  border-radius: 18px;
+
+  box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+
+  transition: all 0.3s ease;
+
+  height: 100%;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+}
+
+.feature-card mat-icon {
+  font-size: 50px;
+
+  width: 50px;
+  height: 50px;
+
+  color: #C89B3C;
+}
+
+.feature-card h4 {
+  margin-top: 20px;
+
+  color: #0d3b75;
+
+  font-weight: bold;
+}
+
+.feature-card p {
+  color: #666;
+
+  font-size: 15px;
+
+  margin-top: 10px;
+}
+
+
+
+/* ====================================
+   CTA SECTION (FULL CURVED DESIGN)
+==================================== */
+.cta-section {
+  padding: 120px 20px;
+  color: white;
+  text-align: center;
+
+  /* Gradient background */
+  background: linear-gradient(135deg, #4338ca, #6d28d9, #4f46e5);
+
+  /* 🔥 Curved from ALL sides */
+  border-radius: 60px;
+
+  /* spacing from edges */
+  margin: 40px;
+
+  position: relative;
+  overflow: hidden;
+}
+
+/* ====================================
+   SOFT GLOW BLOBS
+==================================== */
+.cta-section::before,
+.cta-section::after {
+  content: "";
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.4;
+  z-index: 0;
+}
+
+/* Top-left glow */
+.cta-section::before {
+  background: #f59e0b;
+  top: -100px;
+  left: -120px;
+}
+
+/* Bottom-right glow */
+.cta-section::after {
+  background: #3b82f6;
+  bottom: -120px;
+  right: -140px;
+}
+
+/* ====================================
+   CONTENT WRAPPER
+==================================== */
+.cta-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: auto;
+}
+
+/* ====================================
+   HEADING
+==================================== */
+.cta-section h2 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+/* ====================================
+   PARAGRAPH
+==================================== */
+.cta-section p {
+  font-size: 16px;
+  opacity: 0.9;
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+/* ====================================
+   BUTTON
+==================================== */
+.cta-btn {
+  background: #f59e0b !important;
+  color: #0f172a !important;
+  padding: 12px 25px;
+  font-weight: 600;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.cta-btn:hover {
+  background: #d97706 !important;
+  transform: translateY(-3px);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .cta-section {
+    padding: 80px 15px;
+    border-radius: 0 0 40px 40px;
+  }
+
+  .cta-section h2 {
+    font-size: 26px;
+  }
+}
+
+/* ====================================
+   Responsive
+==================================== */
+
+@media (max-width: 992px) {
+
+  .banner-content h1 {
+    font-size: 48px;
+  }
+
+  .about-section h2,
+  .vision-section h2 {
+    font-size: 34px;
+  }
+
+  .section-heading h2 {
+    font-size: 36px;
+  }
+
+  .cta-section h2 {
+    font-size: 38px;
+  }
+
+  .section-image {
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .about-banner {
+    height: 50vh;
+  }
+
+  .banner-content h1 {
+    font-size: 36px;
+  }
+
+  .banner-content p {
+    font-size: 18px;
+  }
+
+  .about-section,
+  .vision-section,
+  .why-us-section,
+  .stats-section,
+  .cta-section {
+    padding: 70px 0;
+  }
+
+  .about-section h2,
+  .vision-section h2 {
+    font-size: 30px;
+  }
+
+  .section-heading h2 {
+    font-size: 30px;
+  }
+
+  .cta-section h2 {
+    font-size: 30px;
+  }
+
+  .stat-box {
+    margin-bottom: 20px;
+  }
+}
+/* Vision Section */
+
+.vision-section {
+  padding: 100px 0;
+  background: #f8f9fc;
+}
+
+.vision-desc {
+  max-width: 850px;
+  margin: 20px auto 0;
+  text-align: center;
+  color: #666;
+  line-height: 1.8;
+}
+
+.vision-card {
+  background: white;
+  padding: 35px 25px;
+  text-align: center;
+  border-radius: 18px;
+  height: 100%;
+
+  box-shadow: 0 5px 25px rgba(0,0,0,.08);
+
+  transition: all .3s ease;
+}
+
+.vision-card:hover {
+  transform: translateY(-8px);
+}
+
+.vision-card mat-icon {
+  font-size: 50px;
+  width: 50px;
+  height: 50px;
+
+  color: #C89B3C;
+}
+
+.vision-card h4 {
+  margin-top: 20px;
+  color: #0d3b75;
+  font-weight: bold;
+}
+
+.vision-card p {
+  margin-top: 10px;
+  color: #666;
+  line-height: 1.7;
+}

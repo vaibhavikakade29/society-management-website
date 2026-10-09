@@ -1,0 +1,520 @@
+/* ===========================
+   GLOBAL PAGE STYLE
+=========================== */
+
+.page{
+  padding:24px;
+  background:#f4f6fb;
+  min-height:100vh;
+  font-family: Arial, sans-serif;
+}
+
+.page h2{
+  color:#0d2f6f;
+  margin-bottom:20px;
+  font-size:24px;
+  font-weight:700;
+}
+
+/* ===========================
+   MESSAGE BOXES
+=========================== */
+
+.success-message,
+.error-message{
+  padding:14px;
+  border-radius:10px;
+  margin-bottom:15px;
+  font-size:14px;
+  font-weight:500;
+}
+
+.success-message{
+  background:#e7f8ee;
+  color:#1b7a3a;
+  border-left:5px solid #28a745;
+}
+
+.error-message{
+  background:#fde8ea;
+  color:#a12a2a;
+  border-left:5px solid #dc3545;
+}
+
+/* ===========================
+   STATS CARDS
+=========================== */
+
+.stats-container{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:18px;
+  margin-bottom:25px;
+}
+
+.stat-card{
+  background:white;
+  padding:22px;
+  border-radius:14px;
+  text-align:center;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+  transition:0.3s ease;
+}
+
+.stat-card:hover{
+  transform:translateY(-4px);
+}
+
+.stat-card h3{
+  color:#0d2f6f;
+  font-size:30px;
+  margin-bottom:8px;
+}
+
+.stat-card p{
+  color:#666;
+  font-size:14px;
+}
+
+/* ===========================
+   FORM CONTAINER
+=========================== */
+
+.maintenance-form{
+  background:white;
+  padding:24px;
+  border-radius:14px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+  margin-bottom:25px;
+}
+
+.maintenance-form h3{
+  color:#0d2f6f;
+  margin-bottom:15px;
+}
+
+/* Inputs, Select, Textarea */
+.maintenance-form input,
+.maintenance-form textarea,
+.maintenance-form select{
+  width:100%;
+  padding:12px;
+  margin-bottom:14px;
+  border:1px solid #e0e0e0;
+  border-radius:10px;
+  font-size:14px;
+  transition:0.2s;
+  background:#fff;
+}
+
+.maintenance-form input:focus,
+.maintenance-form textarea:focus,
+.maintenance-form select:focus{
+  border-color:#0d2f6f;
+  outline:none;
+  box-shadow:0 0 0 3px rgba(13,47,111,0.1);
+}
+
+/* ===========================
+   BUTTONS
+=========================== */
+
+.generate-btn{
+  background:linear-gradient(135deg,#0d2f6f,#1d4ed8);
+  color:white;
+  border:none;
+  padding:12px 18px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:600;
+  transition:0.3s;
+}
+
+.generate-btn:hover{
+  opacity:0.9;
+  transform:scale(1.02);
+}
+
+.view-btn{
+  background:#16a34a;
+  color:white;
+  border:none;
+  padding:7px 12px;
+  border-radius:8px;
+  cursor:pointer;
+  margin-right:5px;
+}
+
+.edit-btn{
+  background:#2563eb;
+  color:white;
+  border:none;
+  padding:7px 12px;
+  border-radius:8px;
+  cursor:pointer;
+  margin-right:5px;
+}
+
+.delete-btn{
+  background:#dc2626;
+  color:white;
+  border:none;
+  padding:7px 12px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.close-btn{
+  background:#6b7280;
+  color:white;
+  border:none;
+  padding:8px 12px;
+  border-radius:8px;
+  cursor:pointer;
+}
+.approve-btn{
+
+    background:#2196f3;
+
+    color:#fff;
+
+    border:none;
+
+    padding:8px 14px;
+
+    border-radius:6px;
+
+    cursor:pointer;
+
+    margin-right:8px;
+
+}
+
+.approve-btn:hover{
+
+    background:#1976d2;
+
+}
+
+.verification{
+
+    background:#fff3cd;
+
+    color:#856404;
+
+    padding:5px 10px;
+
+    border-radius:15px;
+
+    font-weight:600;
+
+}
+
+.paid-text{
+
+    color:green;
+
+    font-weight:bold;
+
+}
+/* Waiting Status */
+
+.waiting-text{
+
+    display:inline-block;
+
+    background:#ffeeba;
+
+    color:#856404;
+
+    padding:6px 12px;
+
+    border-radius:20px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    border:1px solid #f5c06f;
+
+}
+/* ==========================================
+Approve Button
+========================================== */
+
+.approve-btn{
+    background:#27ae60;
+    color:#fff;
+    border:none;
+    padding:8px 16px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:600;
+    margin-right:8px;
+    transition:.3s;
+}
+
+.approve-btn:hover{
+    background:#1e8449;
+}
+
+/* ==========================================
+Reject Button
+========================================== */
+
+.reject-btn{
+    background:#e74c3c;
+    color:#fff;
+    border:none;
+    padding:8px 16px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+}
+
+.reject-btn:hover{
+    background:#c0392b;
+}
+.edit-btn {
+
+  background: #f39c12;
+
+  color: white;
+
+  border: none;
+
+  padding: 8px 15px;
+
+  border-radius: 6px;
+
+  cursor: pointer;
+
+  margin-right: 8px;
+
+}
+
+.edit-btn:hover {
+
+  background: #d68910;
+
+}
+.action-buttons{
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+gap:8px;
+
+flex-wrap:nowrap;
+
+}
+
+.action-buttons button{
+
+min-width:70px;
+
+padding:8px 14px;
+
+border:none;
+
+border-radius:6px;
+
+cursor:pointer;
+
+font-weight:600;
+
+}
+.verify-btn{
+
+background:#2e7d32;
+
+color:#fff;
+
+border:none;
+
+padding:8px 15px;
+
+border-radius:6px;
+
+cursor:pointer;
+
+font-weight:600;
+
+margin-right:6px;
+
+transition:.3s;
+
+}
+
+.verify-btn:hover{
+
+background:#1b5e20;
+
+}
+.reject-btn{
+
+background:#d32f2f;
+
+color:#fff;
+
+border:none;
+
+padding:8px 15px;
+
+border-radius:6px;
+
+cursor:pointer;
+
+font-weight:600;
+
+transition:.3s;
+
+}
+
+.reject-btn:hover{
+
+background:#b71c1c;
+
+}
+/* ===========================
+   SEARCH BOX
+=========================== */
+
+.search-box{
+  margin-bottom:20px;
+}
+
+.search-box input{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #e0e0e0;
+  font-size:14px;
+}
+
+.search-box input:focus{
+  outline:none;
+  border-color:#0d2f6f;
+  box-shadow:0 0 0 3px rgba(13,47,111,0.1);
+}
+
+/* ===========================
+   TABLE
+=========================== */
+
+.bill-list{
+  background:white;
+  padding:24px;
+  border-radius:14px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+  overflow-x:auto;
+}
+
+.bill-list h3{
+  color:#0d2f6f;
+  margin-bottom:15px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:700px;
+}
+
+thead{
+  background:#0d2f6f;
+  color:white;
+}
+
+th, td{
+  padding:12px;
+  text-align:left;
+  font-size:14px;
+}
+
+tbody tr{
+  border-bottom:1px solid #eee;
+  transition:0.2s;
+}
+
+tbody tr:hover{
+  background:#f8fafc;
+}
+
+/* ===========================
+   STATUS BADGES
+=========================== */
+
+.paid{
+  background:#16a34a;
+  color:white;
+  padding:5px 10px;
+  border-radius:20px;
+  font-size:12px;
+}
+
+.pending{
+  background:#facc15;
+  color:#000;
+  padding:5px 10px;
+  border-radius:20px;
+  font-size:12px;
+}
+
+/* ===========================
+   MODAL
+=========================== */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.55);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:1000;
+}
+
+.modal-content{
+  background:white;
+  width:420px;
+  max-width:95%;
+  padding:24px;
+  border-radius:14px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.25);
+}
+
+.modal-content h2,
+.modal-content h3{
+  color:#0d2f6f;
+  margin-bottom:15px;
+}
+
+.modal-content p{
+  margin-bottom:10px;
+  font-size:14px;
+  line-height:1.5;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media(max-width:768px){
+
+  .stats-container{
+    grid-template-columns:1fr;
+  }
+
+  table{
+    min-width:600px;
+  }
+
+  .modal-content{
+    width:90%;
+  }
+}

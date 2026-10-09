@@ -1,0 +1,159 @@
+.events-wrapper {
+  padding: 20px;
+  background: #f4f6f9;
+  min-height: 100vh;
+  font-family:'Times New Roman', Times, serif
+}
+
+/* HEADER */
+.header h2 {
+  margin: 0;
+  font-size: 26px;
+  color: #2c3e50;
+}
+
+.header p {
+  color: #7f8c8d;
+}
+
+/* CARD */
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+/* FORM GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+input, textarea {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 100%;
+}
+
+textarea {
+  margin-top: 10px;
+  min-height: 80px;
+}
+
+.btn-group {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+button {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #3498db;
+  color: white;
+}
+
+/* EVENT LIST */
+.event-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 15px;
+}
+
+.event-card {
+  background: #fff;
+  border-left: 5px solid #3498db;
+  padding: 15px;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.event-card:hover {
+  transform: translateY(-5px);
+}
+
+.event-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  background: #27ae60;
+  color: white;
+  padding: 3px 8px;
+  font-size: 12px;
+  border-radius: 20px;
+}
+
+.meta {
+  font-size: 13px;
+  color: #555;
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.actions button {
+  background: #2980b9;
+}
+
+.actions .delete {
+  background: #e74c3c;
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+/* TABLET */
+@media (max-width: 992px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .header h2 {
+    font-size: 22px;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+
+  .events-wrapper {
+    padding: 10px;
+  }
+
+  .card {
+    padding: 15px;
+  }
+
+  .event-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  .actions button {
+    width: 100%;
+  }
+}

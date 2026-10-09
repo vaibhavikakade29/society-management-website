@@ -1,0 +1,142 @@
+.footer {
+  background: linear-gradient(135deg, #0f172a, #020617);
+  color: white;
+  padding: 80px 0 25px;
+  position: relative;
+  font-family: 'Times New Roman', Times, serif;
+  overflow: hidden;
+}
+
+/* glow effect */
+.footer::before {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: rgba(212, 175, 55, 0.12);
+  border-radius: 50%;
+  top: -150px;
+  left: -150px;
+  filter: blur(90px);
+}
+
+.footer h4,
+.footer h5 {
+  font-weight: 600;
+  margin-bottom: 15px;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 20px;
+}
+
+.footer p {
+  color: #cbd5e1;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* LOGO */
+.logo-circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+  border: 3px solid #d4af37;
+}
+
+.logo-circle img {
+  width: 70%;
+}
+
+/* LINKS */
+.footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer ul li {
+  margin-bottom: 10px;
+}
+
+.footer ul li a {
+  text-decoration: none;
+  color: #cbd5e1;
+  transition: 0.3s;
+}
+
+.footer ul li a:hover {
+  color: #d4af37;
+  padding-left: 5px;
+}
+
+/* SOCIAL ICONS */
+.social-icons {
+  display: flex;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.social-icons a {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.08);
+  color: white;
+  transition: 0.3s;
+}
+
+.social-icons a:hover {
+  background: #d4af37;
+  color: #0f172a;
+  transform: translateY(-4px);
+}
+
+/* NEWSLETTER */
+.newsletter {
+  display: flex;
+  margin-top: 10px;
+}
+
+.newsletter input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  outline: none;
+  border-radius: 6px 0 0 6px;
+}
+
+.newsletter button {
+  padding: 10px 15px;
+  border: none;
+  background: #d4af37;
+  color: #0f172a;
+  font-weight: bold;
+  border-radius: 0 6px 6px 0;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.newsletter button:hover {
+  background: #b8860b;
+}
+
+/* divider */
+hr {
+  margin: 40px 0 20px;
+  border: none;
+  height: 1px;
+  background: rgba(255,255,255,0.1);
+}
+
+/* copyright */
+.copyright {
+  text-align: center;
+  color: #94a3b8;
+  font-size: 13px;
+}

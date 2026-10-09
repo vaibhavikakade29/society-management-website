@@ -1,0 +1,82 @@
+<div class="events-wrapper">
+
+  <div class="header">
+    <h2>🎉 Event Management</h2>
+    <p>Create and manage society events</p>
+  </div>
+
+  <!-- FORM CARD -->
+  <div class="card form-card">
+
+    <h3>{{ isEditMode ? 'Update Event' : 'Create New Event' }}</h3>
+
+    <div class="grid">
+
+      <input placeholder="Event Title" [(ngModel)]="eventForm.title">
+
+      <input type="date" [(ngModel)]="eventForm.eventDate">
+
+      <input type="time" [(ngModel)]="eventForm.eventTime">
+
+      <input placeholder="Location" [(ngModel)]="eventForm.location">
+
+    </div>
+
+    <textarea placeholder="Event Description"
+              [(ngModel)]="eventForm.description"></textarea>
+
+    <div class="btn-group">
+
+      <button *ngIf="!isEditMode"
+              (click)="createEvent()">
+        ➕ Create Event
+      </button>
+
+      <button *ngIf="isEditMode"
+              (click)="updateEvent()">
+        ✏️ Update Event
+      </button>
+
+      <button class="reset"
+              (click)="reset()">
+        🔄 Reset
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- LIST -->
+  <div class="card">
+
+    <h3>📅 All Events</h3>
+
+    <div class="event-list">
+
+      <div class="event-card" *ngFor="let e of events">
+
+        <div class="event-top">
+          <h4>{{ e.title }}</h4>
+          <span class="badge">{{ e.status }}</span>
+        </div>
+
+        <p>{{ e.description }}</p>
+
+        <div class="meta">
+          <span>📍 {{ e.location }}</span>
+          <span>📅 {{ e.eventDate | date }}</span>
+          <span>⏰ {{ e.eventTime }}</span>
+        </div>
+
+        <div class="actions">
+          <button (click)="editEvent(e)">Edit</button>
+          <button class="delete" (click)="deleteEvent(e._id)">Delete</button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

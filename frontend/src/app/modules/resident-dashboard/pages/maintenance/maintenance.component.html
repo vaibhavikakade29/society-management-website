@@ -1,0 +1,460 @@
+<div class="page">
+
+    <h2>💰 My Maintenance Bills</h2>
+
+    <!-- Success Message -->
+    <div
+        class="success-message"
+        *ngIf="successMessage">
+
+        {{ successMessage }}
+
+    </div>
+
+    <!-- Error Message -->
+    <div
+        class="error-message"
+        *ngIf="errorMessage">
+
+        {{ errorMessage }}
+
+    </div>
+
+    <!-- Statistics -->
+    <div class="stats-container">
+
+        <div class="stat-card">
+
+            <h3>{{ totalBills }}</h3>
+
+            <p>Total Bills</p>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h3>{{ paidBills }}</h3>
+
+            <p>Paid Bills</p>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h3>{{ pendingBills }}</h3>
+
+            <p>Pending Bills</p>
+
+        </div>
+
+    </div>
+
+    <!-- Bills -->
+
+    <div class="bill-list">
+
+        <table *ngIf="bills.length>0">
+
+            <thead>
+
+                <tr>
+
+                    <th>Month</th>
+
+                    <th>Year</th>
+
+                    <th>Amount</th>
+
+                    <th>Due Date</th>
+
+                    <th>Payment Mode</th>
+
+                    <th>Status</th>
+
+                    <th>Remarks</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr *ngFor="let bill of bills">
+
+                    <td>{{ bill.billMonth }}</td>
+
+                    <td>{{ bill.billYear }}</td>
+
+                    <td>₹ {{ bill.maintenanceAmount }}</td>
+
+                    <td>{{ bill.dueDate | date:'dd/MM/yyyy' }}</td>
+
+                    <td>
+
+                        {{ bill.paymentMode || '--' }}
+
+                    </td>
+
+                    <td>
+
+                        <span
+                            class="status pending"
+                            *ngIf="bill.status=='Pending'">
+
+                            Pending
+
+                        </span>
+
+                        <span
+                            class="status verification"
+                            *ngIf="bill.status=='Payment Verification'">
+
+                            Payment Verification
+
+                        </span>
+
+                        <span
+                            class="status cash"
+                            *ngIf="bill.status=='Cash Pending'">
+
+                            Cash Pending
+
+                        </span>
+
+                        <span
+                            class="status paid"
+                            *ngIf="bill.status=='Paid'">
+
+                            Paid
+
+                        </span>
+
+                        <span
+                            class="status rejected"
+                            *ngIf="bill.status=='Rejected'">
+
+                            Rejected
+
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        {{ bill.remarks || '--' }}
+
+                    </td>
+
+                    <td>
+
+                        <!-- Pending -->
+
+                        <button
+                            *ngIf="bill.status=='Pending'"
+                            class="pay-btn"
+                            (click)="openPayment(bill)">
+
+                            💳 Pay Now
+
+                        </button>
+
+                        <!-- Rejected -->
+
+                        <button
+                            *ngIf="bill.status=='Rejected'"
+                            class="pay-btn"
+                            (click)="openPayment(bill)">
+
+                            🔁 Pay Again
+
+                        </button>
+
+                        <!-- Payment Verification -->
+
+                        <span
+                            *ngIf="bill.status=='Payment Verification'"
+                            class="verification-text">
+
+                            ⏳ Waiting for Admin Verification
+
+                        </span>
+
+                        <!-- Cash Pending -->
+
+                        <span
+                            *ngIf="bill.status=='Cash Pending'"
+                            class="cash-text">
+
+                            💵 Visit Society Office
+
+                        </span>
+
+                        <!-- Paid -->
+
+                        <span
+                            *ngIf="bill.status=='Paid'"
+                            class="paid-text">
+
+                            ✅ Paid
+
+                        </span>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+        <p *ngIf="bills.length==0">
+
+            No Maintenance Bills Available.
+
+        </p>
+
+    </div>
+
+</div>
+
+<!-- ===================================================
+Payment Modal
+=================================================== -->
+
+<div
+    class="modal"
+    *ngIf="selectedBill">
+
+    <div class="modal-content">
+
+        <h2>
+
+            Maintenance Payment
+
+        </h2>
+
+        <hr>
+
+        <p>
+
+            <strong>Bill :</strong>
+
+            {{ selectedBill.billMonth }}
+
+            {{ selectedBill.billYear }}
+
+        </p>
+
+        <p>
+
+            <strong>Amount :</strong>
+
+            ₹ {{ selectedBill.maintenanceAmount }}
+
+        </p>
+
+        <label>
+
+            Payment Mode
+
+        </label>
+
+        <select
+            [(ngModel)]="paymentMode">
+
+            <option value="UPI">
+
+                UPI
+
+            </option>
+
+            <option value="Net Banking">
+
+                Net Banking
+
+            </option>
+
+            <option value="Cash">
+
+                Cash
+
+            </option>
+
+        </select>
+
+        <!-- ============================
+        CASH
+        ============================= -->
+
+        <div *ngIf="paymentMode=='Cash'">
+
+            <div class="cash-box">
+
+                <h4>
+
+                    Cash Payment Request
+
+                </h4>
+
+                <p>
+
+                    Please visit the Society Office to pay your maintenance bill.
+
+                </p>
+
+                <p>
+
+                    After submitting this request, your bill status will become
+                    <b>Cash Pending</b>.
+
+                </p>
+
+                <p>
+
+                    The office staff will mark it as <b>Paid</b> after receiving your payment.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- ============================
+        UPI
+        ============================= -->
+
+        <div *ngIf="paymentMode=='UPI'">
+
+            <div class="upi-box">
+
+                <h4>
+
+                    Scan QR Code
+
+                </h4>
+
+                <img
+                    src="assets/images/demo-qr.png"
+                    class="qr-image">
+
+                <p>
+
+                    UPI ID :
+
+                    <strong>
+
+                        vighnaharresidence@upi
+
+                    </strong>
+
+                </p>
+
+            </div>
+
+            <label>
+
+                Transaction ID
+
+            </label>
+
+            <input
+                type="text"
+                [(ngModel)]="transactionId">
+
+        </div>
+
+        <!-- ============================
+        NET BANKING
+        ============================= -->
+
+        <div *ngIf="paymentMode=='Net Banking'">
+
+            <div class="bank-box">
+
+                <h4>
+
+                    Society Bank Details
+
+                </h4>
+
+                <p>
+
+                    Account Name :
+                    Vighnahar Residence Society
+
+                </p>
+
+                <p>
+
+                    Bank :
+                    State Bank of India
+
+                </p>
+
+                <p>
+
+                    Account Number :
+                    123456789012
+
+                </p>
+
+                <p>
+
+                    IFSC :
+                    SBIN0001234
+
+                </p>
+
+            </div>
+
+            <label>
+
+                Transaction Reference Number
+
+            </label>
+
+            <input
+                type="text"
+                [(ngModel)]="transactionId">
+
+        </div>
+
+        <div class="button-group">
+
+            <!-- Cash -->
+
+            <button
+                *ngIf="paymentMode=='Cash'"
+                class="cash-btn"
+                (click)="payBill()">
+
+                Submit Cash Request
+
+            </button>
+
+            <!-- Online -->
+
+            <button
+                *ngIf="paymentMode!='Cash'"
+                class="pay-btn"
+                (click)="payBill()">
+
+                Submit Payment
+
+            </button>
+
+            <button
+                class="close-btn"
+                (click)="cancelPayment()">
+
+                Cancel
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>

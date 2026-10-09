@@ -1,0 +1,378 @@
+<!-- ==========================================================
+     MAIN ADMIN LAYOUT CONTAINER
+=========================================================== -->
+
+<div class="dashboard-container">
+<!-- Mobile Overlay -->
+
+<div
+    class="sidebar-overlay"
+    *ngIf="sidebarOpen"
+    (click)="toggleSidebar()">
+
+</div>
+   <!-- ==========================================================
+     SIDEBAR
+=========================================================== -->
+
+<aside
+    class="sidebar"
+    [class.open]="sidebarOpen">
+
+    <!-- Logo -->
+
+    <div class="logo-section">
+
+        <img
+            src="assets/images/logo1.png"
+            alt="Logo"
+            class="logo">
+
+        <div class="logo-details">
+
+            <h2>Vighnahar Residence</h2>
+
+        </div>
+
+    </div>
+
+    <!-- Navigation -->
+
+    <nav class="menu">
+
+    <p class="menu-heading">
+        MAIN
+    </p>
+
+    <a
+        (click)="navigateTo(
+            '/admin-dashboard/dashboard',
+            'Dashboard',
+            'Loading dashboard...',
+            'dashboard'
+        )">
+
+        <i class="bi bi-grid-fill"></i>
+
+        <span>Dashboard</span>
+
+    </a>
+
+    <p class="menu-heading">
+        MANAGEMENT
+    </p>
+
+    <a
+        (click)="navigateTo(
+            '/admin-dashboard/residents',
+            'Residents',
+            'Opening resident records...',
+            'groups'
+        )">
+
+        <i class="bi bi-people-fill"></i>
+
+        <span>Residents</span>
+
+    </a>
+
+    <a
+        (click)="navigateTo(
+            '/admin-dashboard/visitors',
+            'Visitors',
+            'Loading visitor management...',
+            'badge'
+        )">
+
+        <i class="bi bi-person-walking"></i>
+
+        <span>Visitors</span>
+
+    </a>
+
+    <a
+        (click)="navigateTo(
+            '/admin-dashboard/maintenance',
+            'Maintenance',
+            'Loading maintenance bills...',
+            'payments'
+        )">
+
+        <i class="bi bi-credit-card-fill"></i>
+
+        <span>Maintenance</span>
+
+    </a>
+
+    <p class="menu-heading">
+        COMMUNICATION
+    </p>
+
+    <a
+        (click)="navigateTo(
+            '/admin-dashboard/notices',
+            'Notice Board',
+            'Opening society notices...',
+            'campaign'
+        )">
+
+        <i class="bi bi-megaphone-fill"></i>
+
+        <span>Notices</span>
+
+    </a>
+
+    <a
+        (click)="navigateTo(
+            '/admin-dashboard/events',
+            'Events',
+            'Loading upcoming events...',
+            'event'
+        )">
+
+        <i class="bi bi-calendar-event-fill"></i>
+
+        <span>Events</span>
+
+    </a>
+    <a
+        (click)="navigateTo(
+        '/admin-dashboard/rules',
+        '📜 Society Guidelines',
+        'Loading Society Guidelines...',
+        'gavel'
+        )">
+        <i class="bi bi-journal-text"></i>
+
+        <span>Society Guidelines</span>
+
+        </a>
+
+    <p class="menu-heading">
+        SUPPORT
+    </p>
+
+    <a
+        (click)="navigateTo(
+            '/admin-dashboard/complaints',
+            'Complaints',
+            'Opening complaint management...',
+            'report_problem'
+        )">
+
+        <i class="bi bi-exclamation-triangle-fill"></i>
+
+        <span>Complaints</span>
+
+    </a>
+
+</nav>
+    <!-- Footer -->
+
+    <div class="sidebar-footer">
+
+        <button
+            class="logout-btn"
+            (click)="logout()">
+
+            <i class="bi bi-box-arrow-right"></i>
+
+            Logout
+
+        </button>
+
+    </div>
+
+</aside>
+    <!-- ==========================================================
+         MAIN CONTENT SECTION
+    =========================================================== -->
+
+    <main class="main-content">
+
+        <!-- ======================================================
+             HEADER
+        ======================================================= -->
+
+        <!-- ==========================================================
+     TOP HEADER
+=========================================================== -->
+
+<header class="top-header">
+
+    <!-- Left Side -->
+
+    <div class="header-left">
+
+        <span class="page-title">
+
+           Admin Dashboard
+
+        </span>
+
+        <h1>
+
+            {{ greeting }}, Vinayak Gajanan Patil 👋
+
+        </h1>
+
+        <p>
+
+            Welcome back to Vighnahar Residence Society Management System.
+
+        </p>
+
+        <small>
+
+            {{ todayDate }}
+
+        </small>
+
+    </div>
+
+
+    <!-- Right Side -->
+
+    <div class="header-right">
+
+        <!-- Notification -->
+
+        <div class="notification-wrapper">
+
+            <div
+                class="notification-bell"
+                (click)="toggleNotifications()">
+
+                <i class="bi bi-bell-fill bell-icon"
+                    [class.shake]="notificationCount>0">
+
+                </i>
+
+                <span
+                    *ngIf="notificationCount>0"
+                    class="notification-count">
+
+                    {{ notificationCount }}
+
+                </span>
+
+            </div>
+
+
+            <!-- Notification Dropdown -->
+
+            <div
+                class="notification-dropdown"
+                *ngIf="showNotifications">
+
+                <div class="dropdown-header">
+
+                    <h4>
+
+                        Notifications
+
+                    </h4>
+
+                    <button
+                        class="mark-read-btn"
+                        (click)="markAllRead()">
+
+                        Mark All Read
+
+                    </button>
+
+                </div>
+
+                <div
+                    class="notification-item"
+                    *ngFor="let notification of notifications">
+
+                    <strong>
+
+                        {{ notification.title }}
+
+                    </strong>
+
+                    <p>
+
+                        {{ notification.message }}
+
+                    </p>
+
+                    <small>
+
+                        {{ notification.createdDate }}
+
+                    </small>
+
+                    <br>
+
+                    <button
+                        *ngIf="notification.type==='registration'"
+                        class="view-resident-btn"
+                        (click)="openResidentsPage(notification)">
+
+                        View Resident
+
+                    </button>
+
+                </div>
+
+                <div
+                    class="empty-notification"
+                    *ngIf="notifications.length==0">
+
+                    No Notifications Available
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Admin Card -->
+
+        <div class="admin-profile">
+
+            <div class="admin-avatar">
+
+                <i class="bi bi-person-fill"></i>
+
+            </div>
+
+            <div class="admin-details">
+
+                <h3>
+
+                    Admin
+
+                </h3>
+
+                <span>
+
+                    Society Administrator
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+        <!-- ======================================================
+             PAGE CONTENT
+             Dashboard and Other Pages Will Load Here
+        ======================================================= -->
+
+        <section class="page-content">
+
+            <router-outlet></router-outlet>
+
+        </section>
+
+    </main>
+
+</div>

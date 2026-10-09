@@ -1,0 +1,617 @@
+<div class="profile-container">
+
+  <!-- ============================= -->
+  <!-- Loading -->
+  <!-- ============================= -->
+
+  <div *ngIf="loading" class="loading">
+    <h3>Loading Profile...</h3>
+  </div>
+
+  <div *ngIf="!loading">
+
+    <!-- ============================= -->
+    <!-- Header -->
+    <!-- ============================= -->
+
+    <div class="profile-header">
+
+      <div class="profile-image">
+
+        <img
+          *ngIf="profile.profileImage"
+          [src]="profile.profileImage"
+          alt="Profile">
+
+        <img
+          *ngIf="!profile.profileImage"
+          src="assets/images/default-user.png"
+          alt="Default Profile">
+
+      </div>
+
+      <div class="profile-title">
+
+        <h2>{{ user.fullName }}</h2>
+
+        <p>{{ user.email }}</p>
+
+        <span class="status approved">
+          {{ user.status | titlecase }}
+        </span>
+
+      </div>
+
+      <div class="profile-actions">
+
+        <button
+          *ngIf="!isEditMode"
+          class="btn btn-primary"
+          (click)="toggleEdit()">
+
+          Edit Profile
+
+        </button>
+
+        <button
+          *ngIf="isEditMode"
+          class="btn btn-secondary"
+          (click)="toggleEdit()">
+
+          Cancel
+
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- ============================= -->
+    <!-- Basic Information -->
+    <!-- ============================= -->
+
+    <div class="card">
+
+      <h3>Basic Information</h3>
+
+      <div class="grid">
+
+        <!-- Full Name -->
+
+        <div class="form-group">
+
+          <label>Full Name</label>
+
+          <input
+            type="text"
+            [(ngModel)]="user.fullName"
+            [readonly]="!isEditMode">
+
+        </div>
+
+        <!-- Email -->
+
+        <div class="form-group">
+
+          <label>Email</label>
+
+          <input
+            type="email"
+            [value]="user.email"
+            readonly>
+
+        </div>
+
+        <!-- Phone -->
+
+        <div class="form-group">
+
+          <label>Phone</label>
+
+          <input
+            type="text"
+            [(ngModel)]="user.phone"
+            [readonly]="!isEditMode">
+
+        </div>
+
+        <!-- Emergency Contact Name -->
+
+        <div class="form-group">
+
+          <label>Emergency Contact Name</label>
+
+          <input
+            type="text"
+            [(ngModel)]="user.emergencyContactName"
+            [readonly]="!isEditMode">
+
+        </div>
+
+        <!-- Emergency Contact Number -->
+
+        <div class="form-group">
+
+          <label>Emergency Contact Number</label>
+
+          <input
+            type="text"
+            [(ngModel)]="user.emergencyContactNumber"
+            [readonly]="!isEditMode">
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ============================= -->
+    <!-- Society Information -->
+    <!-- ============================= -->
+
+    <div class="card">
+
+      <h3>Society Information</h3>
+
+      <div class="grid">
+
+        <!-- Wing -->
+
+        <div class="form-group">
+
+          <label>Wing</label>
+
+          <input
+            [value]="user.wing"
+            readonly>
+
+        </div>
+
+        <!-- Flat Number -->
+
+        <div class="form-group">
+
+          <label>Flat Number</label>
+
+          <input
+            [value]="user.flatNo"
+            readonly>
+
+        </div>
+
+        <!-- User Type -->
+
+        <div class="form-group">
+
+          <label>User Type</label>
+
+          <input
+            [value]="user.userType | titlecase"
+            readonly>
+
+        </div>
+
+        <!-- Role -->
+
+        <div class="form-group">
+
+          <label>Role</label>
+
+          <input
+            [value]="user.role | titlecase"
+            readonly>
+
+        </div>
+
+        <!-- Committee Role -->
+
+        <div class="form-group">
+
+          <label>Committee Role</label>
+
+          <input
+            [value]="user.committeeRole || 'Not Assigned'"
+            readonly>
+
+        </div>
+
+        <!-- Owner Name -->
+
+        <div
+          class="form-group"
+          *ngIf="user.ownerName">
+
+          <label>Owner Name</label>
+
+          <input
+            [value]="user.ownerName"
+            readonly>
+
+        </div>
+
+        <!-- Relationship -->
+
+        <div
+          class="form-group"
+          *ngIf="user.relationship">
+
+          <label>Relationship</label>
+
+          <input
+            [value]="user.relationship"
+            readonly>
+
+        </div>
+
+      </div>
+
+    </div>
+        <!-- ========================================= -->
+    <!-- Personal Information -->
+    <!-- ========================================= -->
+
+    <div class="card">
+
+      <h3>Personal Information</h3>
+
+      <div class="grid">
+
+        <!-- Gender -->
+
+        <div class="form-group">
+
+          <label>Gender</label>
+
+          <select
+            [(ngModel)]="profile.gender"
+            [disabled]="!isEditMode">
+
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+
+          </select>
+
+        </div>
+
+        <!-- Date of Birth -->
+
+        <div class="form-group">
+
+          <label>Date of Birth</label>
+
+          <input
+            type="date"
+            [(ngModel)]="profile.dateOfBirth"
+            [readonly]="!isEditMode">
+
+        </div>
+
+        <!-- Occupation -->
+
+        <div class="form-group">
+
+          <label>Occupation</label>
+
+          <input
+            type="text"
+            [(ngModel)]="profile.occupation"
+            [readonly]="!isEditMode">
+
+        </div>
+
+        <!-- Move In Date -->
+
+        <div class="form-group">
+
+          <label>Move In Date</label>
+
+          <input
+            type="date"
+            [(ngModel)]="profile.moveInDate"
+            [readonly]="!isEditMode">
+
+        </div>
+
+        <!-- Alternate Phone -->
+
+        <div class="form-group">
+
+          <label>Alternate Phone</label>
+
+          <input
+            type="text"
+            [(ngModel)]="profile.alternatePhone"
+            [readonly]="!isEditMode">
+
+        </div>
+
+        <!-- Blood Group -->
+
+        <div class="form-group">
+
+          <label>Blood Group</label>
+
+          <select
+            [(ngModel)]="profile.bloodGroup"
+            [disabled]="!isEditMode">
+
+            <option value="">Select Blood Group</option>
+            <option>A+</option>
+            <option>A-</option>
+            <option>B+</option>
+            <option>B-</option>
+            <option>AB+</option>
+            <option>AB-</option>
+            <option>O+</option>
+            <option>O-</option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+      <!-- Bio -->
+
+      <div class="form-group mt-3">
+
+        <label>Bio</label>
+
+        <textarea
+          rows="4"
+          maxlength="300"
+          [(ngModel)]="profile.bio"
+          [readonly]="!isEditMode">
+
+        </textarea>
+
+      </div>
+
+    </div>
+
+    <!-- ========================================= -->
+    <!-- Family Members -->
+    <!-- ========================================= -->
+
+    <div class="card">
+
+      <div class="section-header">
+
+        <h3>Family Members</h3>
+
+        <button
+          *ngIf="isEditMode"
+          type="button"
+          class="btn btn-success"
+          (click)="addFamilyMember()">
+
+          + Add Member
+
+        </button>
+
+      </div>
+
+      <div
+        class="family-card"
+        *ngFor="let member of profile.familyMembers; let i = index">
+
+        <div class="grid">
+
+          <!-- Name -->
+
+          <div class="form-group">
+
+            <label>Name</label>
+
+            <input
+              type="text"
+              [(ngModel)]="member.name"
+              [readonly]="!isEditMode">
+
+          </div>
+
+          <!-- Relation -->
+
+          <div class="form-group">
+
+            <label>Relation</label>
+
+            <input
+              type="text"
+              [(ngModel)]="member.relation"
+              [readonly]="!isEditMode">
+
+          </div>
+
+          <!-- DOB -->
+
+          <div class="form-group">
+
+            <label>Date of Birth</label>
+
+            <input
+              type="date"
+              [(ngModel)]="member.dateOfBirth"
+              [readonly]="!isEditMode">
+
+          </div>
+
+        </div>
+
+        <button
+          *ngIf="isEditMode"
+          type="button"
+          class="btn btn-danger mt-2"
+          (click)="removeFamilyMember(i)">
+
+          Remove Member
+
+        </button>
+
+      </div>
+
+      <p
+        class="empty-message"
+        *ngIf="profile.familyMembers.length === 0">
+
+        No family members added.
+
+      </p>
+
+    </div>
+        <!-- ========================================= -->
+    <!-- Vehicles -->
+    <!-- ========================================= -->
+
+    <div class="card">
+
+      <div class="section-header">
+
+        <h3>Vehicles</h3>
+
+        <button
+          *ngIf="isEditMode"
+          type="button"
+          class="btn btn-success"
+          (click)="addVehicle()">
+
+          + Add Vehicle
+
+        </button>
+
+      </div>
+
+      <div
+        class="vehicle-card"
+        *ngFor="let vehicle of profile.vehicles; let i = index">
+
+        <div class="grid">
+
+          <!-- Vehicle Type -->
+
+          <div class="form-group">
+
+            <label>Vehicle Type</label>
+
+            <select
+              [(ngModel)]="vehicle.vehicleType"
+              [disabled]="!isEditMode">
+
+              <option value="">Select</option>
+              <option value="Car">Car</option>
+              <option value="Bike">Bike</option>
+              <option value="Scooter">Scooter</option>
+              <option value="Cycle">Cycle</option>
+              <option value="Other">Other</option>
+
+            </select>
+
+          </div>
+
+          <!-- Vehicle Number -->
+
+          <div class="form-group">
+
+            <label>Vehicle Number</label>
+
+            <input
+              type="text"
+              [(ngModel)]="vehicle.vehicleNumber"
+              [readonly]="!isEditMode">
+
+          </div>
+
+          <!-- Parking Slot -->
+
+          <div class="form-group">
+
+            <label>Parking Slot</label>
+
+            <input
+              type="text"
+              [(ngModel)]="vehicle.parkingSlot"
+              [readonly]="!isEditMode">
+
+          </div>
+
+        </div>
+
+        <button
+          *ngIf="isEditMode"
+          type="button"
+          class="btn btn-danger mt-2"
+          (click)="removeVehicle(i)">
+
+          Remove Vehicle
+
+        </button>
+
+      </div>
+
+      <p
+        class="empty-message"
+        *ngIf="profile.vehicles.length === 0">
+
+        No vehicles added.
+
+      </p>
+
+    </div>
+
+    <!-- ========================================= -->
+    <!-- Profile Image -->
+    <!-- ========================================= -->
+
+    <!-- <div class="card">
+
+      <h3>Profile Picture</h3>
+
+      <div class="form-group">
+
+        <label>Profile Image URL</label>
+
+        <input
+          type="text"
+          [(ngModel)]="profile.profileImage"
+          [readonly]="!isEditMode"
+          placeholder="https://example.com/photo.jpg">
+
+      </div>
+
+      <small class="text-muted">
+        You can replace this with file upload later using Multer or Cloudinary.
+      </small>
+
+    </div> -->
+
+    <!-- ========================================= -->
+    <!-- Action Buttons -->
+    <!-- ========================================= -->
+
+    <div
+      class="action-buttons"
+      *ngIf="isEditMode">
+
+      <button
+        class="btn btn-primary"
+        (click)="saveProfile()">
+
+        Save Changes
+
+      </button>
+
+      <button
+        class="btn btn-secondary"
+        (click)="toggleEdit()">
+
+        Cancel
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

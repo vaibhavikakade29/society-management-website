@@ -1,0 +1,209 @@
+<section
+  id="hero"
+  class="hero-section"
+  [style.background-image]="'url(' + images[currentImage] + ')'">
+
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+
+    <span class="hero-tag">
+      WELCOME TO
+    </span>
+
+    <h1>
+      Vighnahar Residence
+    </h1>
+
+    <h3>
+      Modern Living. Secure Lifestyle. Premium Comfort.
+    </h3>
+
+    <p>
+      Experience a thoughtfully designed residential community
+      with modern amenities, green surroundings, and a secure
+      environment for families.
+    </p>
+
+    <div class="hero-buttons">
+      <button class="secondary-btn" routerLink="/about">
+        Explore Society
+      </button>
+    </div>
+
+    <div class="hero-stats">
+
+      <div class="stat-card">
+        <h2>500+</h2>
+        <span>Families</span>
+      </div>
+
+      <div class="stat-card">
+        <h2>24/7</h2>
+        <span>Security</span>
+      </div>
+
+      <div class="stat-card">
+        <h2>15+</h2>
+        <span>Amenities</span>
+      </div>
+
+      <div class="stat-card">
+        <h2>100%</h2>
+        <span>Green Space</span>
+      </div>
+
+    </div>
+
+    <!-- Slider Indicators -->
+
+    <div class="slider-dots">
+
+      <span
+        *ngFor="let image of images; let i = index"
+        [class.active]="i === currentImage">
+      </span>
+
+    </div>
+
+  </div>
+
+</section>
+<section class="about-preview-section">
+
+  <div class="container">
+
+    <!-- ABOUT US -->
+
+    <div class="content-block">
+
+      <div class="content-icon">
+        <mat-icon>apartment</mat-icon>
+      </div>
+
+      <h2>About Vighnahar Residence</h2>
+
+      <p>
+        Vighnahar Residence is a thoughtfully planned residential
+        community offering modern living spaces, secure surroundings,
+        and a peaceful environment for families. Designed with comfort
+        and convenience in mind, it combines elegant architecture,
+        green landscapes, and lifestyle amenities to create a truly
+        enriching living experience.
+      </p>
+
+      <button
+        mat-raised-button
+        class="gold-btn"
+        routerLink="/about">
+        Explore More
+        </button>
+
+    </div>
+
+    <!-- WHY CHOOSE US -->
+
+    <div class="content-block why-section">
+
+      <h2>Why Choose Us</h2>
+
+      <div class="feature-grid">
+
+        <div class="feature-card">
+          <mat-icon>security</mat-icon>
+          <h4>24×7 Security</h4>
+          <p>Advanced surveillance and gated access.</p>
+        </div>
+
+        <div class="feature-card">
+          <mat-icon>park</mat-icon>
+          <h4>Green Environment</h4>
+          <p>Beautiful gardens and open spaces.</p>
+        </div>
+
+        <div class="feature-card">
+          <mat-icon>directions_car</mat-icon>
+          <h4>Parking Facility</h4>
+          <p>Dedicated parking for residents.</p>
+        </div>
+
+        <div class="feature-card">
+          <mat-icon>groups</mat-icon>
+          <h4>Community Living</h4>
+          <p>Friendly and family-oriented environment.</p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- HEADER -->
+    <div class="feature-header">
+      <h2>Everything Vighnahar Residence Offers</h2>
+      <p>
+       A thoughtfully designed set of features that make life at Vighnahar 
+       Residence more comfortable, secure, and well-organized for every resident.
+      </p>
+    </div>
+
+    <!-- FEATURE GRID -->
+    <div class="feature-grid">
+
+      <div class="feature-card">
+        <mat-icon>payments</mat-icon>
+        <h4>Maintenance Collection</h4>
+        <p>Automated billing, online payments, and instant receipts. Track dues easily.</p>
+      </div>
+
+      <div class="feature-card">
+        <mat-icon>groups</mat-icon>
+        <h4>Member Management</h4>
+        <p>Complete directory with unit details, contacts, and document storage.</p>
+      </div>
+
+      <div class="feature-card">
+        <mat-icon>badge</mat-icon>
+        <h4>Visitor Management</h4>
+        <p>Digital entry logs, pre-approval system, and real-time notifications.</p>
+      </div>
+
+      <div class="feature-card">
+        <mat-icon>report_problem</mat-icon>
+        <h4>Complaint Tracking</h4>
+        <p>Raise, track, and resolve complaints with full transparency.</p>
+      </div>
+
+      <div class="feature-card">
+        <mat-icon>campaign</mat-icon>
+        <h4>Notice Board</h4>
+        <p>Instant digital notices to keep all residents informed.</p>
+      </div>
+
+      <div class="feature-card">
+        <mat-icon>event</mat-icon>
+        <h4>Meeting Management</h4>
+        <p>Schedule AGMs, track attendance, and maintain meeting minutes.</p>
+      </div>
+
+      <!-- ⭐ NEW ADDED FEATURES -->
+
+      <div class="feature-card">
+        <mat-icon>celebration</mat-icon>
+        <h4>Community Events</h4>
+        <p>Organize festivals, gatherings, and social activities to build strong community bonding.</p>
+      </div>
+
+      <div class="feature-card">
+        <mat-icon>support_agent</mat-icon>
+        <h4>Resident Support</h4>
+        <p>24/7 helpdesk for queries, complaints, and assistance for all residents.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

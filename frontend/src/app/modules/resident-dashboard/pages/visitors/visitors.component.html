@@ -1,0 +1,340 @@
+<div class="visitor-container">
+
+    <!-- ============================= -->
+    <!-- Page Title -->
+    <!-- ============================= -->
+
+    <div class="page-header">
+        <h2>Visitor Management</h2>
+        <p>Create a visitor request and track its approval status.</p>
+    </div>
+
+    <!-- ============================= -->
+    <!-- Success Message -->
+    <!-- ============================= -->
+
+    <div class="alert success" *ngIf="successMessage">
+        {{ successMessage }}
+    </div>
+
+    <!-- ============================= -->
+    <!-- Error Message -->
+    <!-- ============================= -->
+
+    <div class="alert error" *ngIf="errorMessage">
+        {{ errorMessage }}
+    </div>
+
+    <!-- ============================= -->
+    <!-- Add Visitor Form -->
+    <!-- ============================= -->
+
+    <div class="card">
+
+        <h3>Add Visitor</h3>
+
+        <form
+            [formGroup]="visitorForm"
+            (ngSubmit)="submitVisitor()">
+
+            <div class="form-grid">
+
+                <!-- Visitor Name -->
+
+                <div class="form-group">
+
+                    <label>Visitor Name *</label>
+
+                    <input
+                        type="text"
+                        formControlName="visitorName">
+
+                    <small
+                        class="validation"
+                        *ngIf="f['visitorName'].touched && f['visitorName'].invalid">
+
+                        Visitor name is required.
+
+                    </small>
+
+                </div>
+
+                <!-- Mobile -->
+
+                <div class="form-group">
+
+                    <label>Mobile Number *</label>
+
+                    <input
+                        type="text"
+                        maxlength="10"
+                        formControlName="mobile">
+
+                    <small
+                        class="validation"
+                        *ngIf="f['mobile'].touched && f['mobile'].invalid">
+
+                        Enter a valid mobile number.
+
+                    </small>
+
+                </div>
+
+                <!-- Purpose -->
+
+                <div class="form-group">
+
+                    <label>Purpose *</label>
+
+                    <input
+                        type="text"
+                        formControlName="purpose">
+
+                </div>
+
+                <!-- Visit Date -->
+
+                <div class="form-group">
+
+                    <label>Visit Date *</label>
+
+                    <input
+                        type="date"
+                        formControlName="visitDate">
+
+                </div>
+
+                <!-- Expected Time -->
+
+                <div class="form-group">
+
+                <label>Expected Time *</label>
+
+                <input
+                    type="time"
+                    formControlName="expectedTime">
+
+            </div>
+
+            <div class="form-group">
+
+                <label>AM / PM *</label>
+
+                <select formControlName="expectedPeriod">
+
+                    <option value="AM">AM</option>
+
+                    <option value="PM">PM</option>
+
+                </select>
+
+            </div>
+
+                <!-- Number of Visitors -->
+
+                <div class="form-group">
+
+                    <label>No. of Visitors *</label>
+
+                    <input
+                        type="number"
+                        min="1"
+                        formControlName="numberOfVisitors">
+
+                </div>
+
+                <!-- Vehicle -->
+
+                <div class="form-group">
+
+                    <label>Vehicle Number</label>
+
+                    <input
+                        type="text"
+                        formControlName="vehicleNumber">
+
+                </div>
+
+                <!-- Proof Type -->
+
+                <div class="form-group">
+
+                    <label>ID Proof Type</label>
+
+                    <select formControlName="idProofType">
+
+                        <option value="">Select</option>
+
+                        <option>Aadhaar</option>
+
+                        <option>PAN</option>
+
+                        <option>Driving License</option>
+
+                        <option>Passport</option>
+
+                        <option>Voter ID</option>
+
+                    </select>
+
+                </div>
+
+                <!-- Proof Number -->
+
+                <div class="form-group">
+
+                    <label>ID Proof Number</label>
+
+                    <input
+                        type="text"
+                        formControlName="idProofNumber">
+
+                </div>
+
+            </div>
+
+            <!-- Remarks -->
+
+            <div class="form-group">
+
+                <label>Remarks</label>
+
+                <textarea
+                    rows="3"
+                    formControlName="remarks"></textarea>
+
+            </div>
+
+            <button
+                class="submit-btn"
+                type="submit"
+                [disabled]="isSubmitting">
+
+                {{ isSubmitting ? 'Submitting...' : 'Submit Visitor Request' }}
+
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- ============================= -->
+    <!-- Visitor List -->
+    <!-- ============================= -->
+
+    <div class="card">
+
+        <h3>My Visitor Requests</h3>
+
+        <div
+            class="loading"
+            *ngIf="isLoading">
+
+            Loading visitors...
+
+        </div>
+
+        <div
+            class="empty"
+            *ngIf="!isLoading && visitors.length === 0">
+
+            No visitor requests found.
+
+        </div>
+
+        <table
+            *ngIf="!isLoading && visitors.length > 0">
+
+            <thead>
+
+                <tr>
+
+                    <th>Name</th>
+
+                    <th>Purpose</th>
+
+                    <th>Date</th>
+
+                    <th>Time</th>
+
+                    <th>Status</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr
+                    *ngFor="let visitor of visitors">
+
+                    <td>
+
+                        {{ visitor.visitorName }}
+
+                    </td>
+
+                    <td>
+
+                        {{ visitor.purpose }}
+
+                    </td>
+
+                    <td>
+
+                        {{ visitor.visitDate | date:'dd/MM/yyyy' }}
+
+                    </td>
+
+                    <td>
+
+                       {{ visitor.expectedTime }} {{ visitor.expectedPeriod }}
+
+                    </td>
+
+                    <td>
+
+                        <span
+                            class="badge"
+                            [ngClass]="getStatusClass(visitor.status)">
+
+                            {{ visitor.status }}
+
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <button
+
+                            *ngIf="visitor.status==='Pending'"
+
+                            class="cancel-btn"
+
+                            (click)="cancelVisitor(visitor._id)">
+
+                            Cancel
+
+                        </button>
+
+                        <span
+                            *ngIf="visitor.status!=='Pending'">
+
+                            -
+
+                        </span>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>

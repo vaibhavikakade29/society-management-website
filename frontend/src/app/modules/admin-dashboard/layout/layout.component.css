@@ -1,0 +1,1161 @@
+/* ==========================================================
+   ADMIN LAYOUT
+   Vighnahar Residence Society Management System
+========================================================== */
+
+/* ==========================================================
+   GLOBAL LAYOUT
+========================================================== */
+
+.dashboard-container {
+
+    display: flex;
+
+    min-height: 100vh;
+
+    background: #f4f7fc;
+
+    overflow: hidden;
+
+    font-family: 'Times New Roman', Times, serif;
+
+}
+/*=========================================================
+                    SIDEBAR
+=========================================================*/
+
+.sidebar{
+
+    width:280px;
+
+    min-width:280px;
+
+    background:#14213d;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:space-between;
+
+    color:#ffffff;
+
+    box-shadow:6px 0 18px rgba(0,0,0,.08);
+
+}
+
+/*=========================================================
+                    LOGO
+=========================================================*/
+
+.logo-section{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    padding:28px 22px;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+.logo{
+
+    width:58px;
+
+    height:58px;
+
+    border-radius:14px;
+
+    background:#ffffff;
+
+    padding:6px;
+
+}
+
+.logo-details h2{
+
+    font-size:20px;
+
+    margin-bottom:5px;
+
+    color:#ffffff;
+
+    font-family: 'Times New Roman', Times, serif;
+
+}
+
+.logo-details p{
+
+    color:#b8c4d8;
+
+    font-size:13px;
+    font-family: 'Times New Roman', Times, serif;
+
+}
+
+/*=========================================================
+                    MENU
+=========================================================*/
+
+.menu{
+
+    flex:1;
+
+    padding:20px 15px;
+
+    overflow-y:auto;
+
+}
+
+.menu-heading{
+
+    color:#8da2c0;
+
+    font-size:11px;
+    font-family: 'Times New Roman', Times, serif;
+
+    font-weight:700;
+
+    letter-spacing:1.5px;
+
+    margin:22px 15px 10px;
+
+}
+
+.menu a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    text-decoration:none;
+
+    color:#d7e2f0;
+
+    padding:14px 16px;
+
+    border-radius:14px;
+
+    margin-bottom:8px;
+
+    transition:.30s;
+
+    font-size:15px;
+    font-family: 'Times New Roman', Times, serif;
+
+    font-weight:500;
+
+}
+
+.menu a i{
+
+    font-size:20px;
+    font-family: 'Times New Roman', Times, serif;
+
+    width:24px;
+
+    text-align:center;
+
+}
+
+.menu a:hover{
+
+    background:#203354;
+
+    color:#ffffff;
+
+    transform:translateX(5px);
+
+}
+
+.menu a.active{
+
+    background:linear-gradient(90deg,#2563eb,#3b82f6);
+
+    color:#ffffff;
+
+    box-shadow:0 10px 20px rgba(37,99,235,.30);
+
+}
+
+/*=========================================================
+                    FOOTER
+=========================================================*/
+
+.sidebar-footer{
+
+    padding:20px;
+
+    border-top:1px solid rgba(255,255,255,.08);
+
+}
+
+.logout-btn{
+
+    width:100%;
+
+    border:none;
+
+    background:#ef4444;
+
+    color:#ffffff;
+
+    padding:14px;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-size:15px;
+    font-family: 'Times New Roman', Times, serif;
+
+    font-weight:600;
+
+    transition:.30s;
+
+}
+
+.logout-btn:hover{
+
+    background:#dc2626;
+
+    transform:translateY(-2px);
+
+}
+
+/*=========================================================
+                    SCROLLBAR
+=========================================================*/
+
+.menu::-webkit-scrollbar{
+
+    width:6px;
+
+}
+
+.menu::-webkit-scrollbar-thumb{
+
+    background:#2d4268;
+
+    border-radius:20px;
+
+}
+/* ==========================================================
+   MAIN CONTENT
+========================================================== */
+
+.main-content {
+
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 30px;
+
+    box-sizing: border-box;
+
+}
+
+/* ==========================================================
+   HEADER
+========================================================== */
+/*=========================================================
+                    TOP HEADER
+=========================================================*/
+
+.top-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:30px;
+
+}
+
+.header-left{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+}
+
+.page-title{
+
+    color:#2563eb;
+
+    font-size:14px;
+    font-family: 'Times New Roman', Times, serif;
+
+    font-weight:600;
+
+    letter-spacing:1px;
+
+    text-transform:uppercase;
+
+}
+
+.header-left h1{
+
+    font-size:32px;
+    font-family: 'Times New Roman', Times, serif;
+
+    color:#1e293b;
+
+    font-weight:700;
+
+}
+
+.header-left p{
+
+    color:#64748b;
+
+    font-size:15px;
+    font-family: 'Times New Roman', Times, serif;
+
+}
+
+.header-left small{
+
+    color:#94a3b8;
+
+    font-size:14px;
+    font-family: 'Times New Roman', Times, serif;
+
+}
+
+.header-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:25px;
+
+}
+/*=========================================================
+                    NOTIFICATION
+=========================================================*/
+
+.notification-wrapper{
+
+    position:relative;
+
+}
+
+.notification-bell{
+
+    width:56px;
+
+    height:56px;
+
+    border-radius:16px;
+
+    background:#ffffff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    box-shadow:0 8px 18px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+.notification-bell:hover{
+
+    transform:translateY(-3px);
+
+    background:#2563eb;
+
+}
+
+.notification-bell:hover .bell-icon{
+
+    color:#ffffff;
+
+}
+
+.bell-icon{
+
+    font-size:24px;
+    font-family: 'Times New Roman', Times, serif;
+
+    color:#2563eb;
+
+}
+
+.notification-count{
+
+    position:absolute;
+
+    top:-6px;
+
+    right:-6px;
+
+    background:#ef4444;
+
+    color:#fff;
+
+    min-width:22px;
+
+    height:22px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:12px;
+    font-family: 'Times New Roman', Times, serif;
+
+    font-weight:700;
+
+}
+/* ==========================================
+   Bell Shake
+========================================== */
+
+.shake{
+
+    animation:bellShake 1.2s infinite;
+
+}
+
+@keyframes bellShake{
+
+    0%{
+
+        transform:rotate(0deg);
+
+    }
+
+    10%{
+
+        transform:rotate(18deg);
+
+    }
+
+    20%{
+
+        transform:rotate(-18deg);
+
+    }
+
+    30%{
+
+        transform:rotate(15deg);
+
+    }
+
+    40%{
+
+        transform:rotate(-15deg);
+
+    }
+
+    50%{
+
+        transform:rotate(10deg);
+
+    }
+
+    60%{
+
+        transform:rotate(-10deg);
+
+    }
+
+    70%{
+
+        transform:rotate(5deg);
+
+    }
+
+    80%{
+
+        transform:rotate(-5deg);
+
+    }
+
+    100%{
+
+        transform:rotate(0deg);
+
+    }
+
+}
+@keyframes pulse{
+
+    0%{
+
+        transform:scale(1);
+
+    }
+
+    50%{
+
+        transform:scale(1.2);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+    }
+
+}
+
+/* ==========================================================
+   USER INFORMATION
+========================================================== */
+
+.user-info {
+
+    background: #f8fafc;
+
+    padding: 10px 18px;
+
+    border-radius: 12px;
+
+    text-align: right;
+
+    border: 1px solid #e5e7eb;
+
+}
+
+.user-info h3 {
+
+    margin: 0;
+
+    color: #0A2F73;
+
+    font-size: 17px;
+    font-family: 'Times New Roman', Times, serif;
+
+    font-weight: 600;
+
+}
+
+.user-info p {
+
+    margin-top: 5px;
+
+    color: #666666;
+
+    font-size: 13px;
+    font-family: 'Times New Roman', Times, serif;
+
+}
+
+/* ==========================================================
+   NOTIFICATION DROPDOWN
+========================================================== */
+
+.notification-dropdown {
+
+    position: absolute;
+
+    top: 60px;
+
+    right: 0;
+
+    width: 360px;
+
+    max-height: 430px;
+
+    overflow-y: auto;
+
+    background: #ffffff;
+
+    border-radius: 15px;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+
+    z-index: 1000;
+
+}
+
+/* ==========================================================
+   DROPDOWN HEADER
+========================================================== */
+
+.dropdown-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 15px;
+
+    border-bottom: 1px solid #eeeeee;
+
+}
+
+.dropdown-header h4 {
+
+    margin: 0;
+
+    color: #0A2F73;
+
+    font-size: 18px;
+    font-family: 'Times New Roman', Times, serif;
+
+}
+
+.mark-read-btn {
+
+    border: none;
+
+    background: #1565C0;
+
+    color: white;
+
+    padding: 8px 12px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    font-size: 12px;
+    font-family: 'Times New Roman', Times, serif;
+
+}
+
+.mark-read-btn:hover {
+
+    background: #0A2F73;
+
+}
+
+/* ==========================================================
+   NOTIFICATION ITEM
+========================================================== */
+
+.notification-item {
+
+    padding: 15px;
+
+    border-bottom: 1px solid #eeeeee;
+
+    transition: background 0.3s ease;
+
+}
+
+.notification-item:hover {
+
+    background: #f7fbff;
+
+}
+
+.notification-item strong {
+
+    display: block;
+
+    color: #0A2F73;
+
+    margin-bottom: 8px;
+
+}
+
+.notification-item p {
+
+    margin: 0;
+
+    color: #555555;
+
+    font-size: 14px;
+    font-family: 'Times New Roman', Times, serif;
+
+    line-height: 1.5;
+
+}
+
+.notification-item small {
+
+    display: inline-block;
+
+    margin-top: 10px;
+
+    color: #888888;
+
+    font-size: 12px;
+    font-family: 'Times New Roman', Times, serif;
+
+}
+
+/* ==========================================================
+   VIEW RESIDENT BUTTON
+========================================================== */
+
+.view-resident-btn {
+
+    margin-top: 10px;
+
+    border: none;
+
+    background: #0A2F73;
+
+    color: white;
+
+    padding: 8px 14px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+}
+
+.view-resident-btn:hover {
+
+    background: #1565C0;
+
+}
+
+/* ==========================================================
+   EMPTY NOTIFICATION
+========================================================== */
+
+.empty-notification {
+
+    padding: 30px;
+
+    text-align: center;
+
+    color: #888888;
+
+    font-size: 14px;
+    font-family: 'Times New Roman', Times, serif;
+
+}
+
+/* ==========================================================
+   PAGE CONTENT
+========================================================== */
+
+.page-content {
+
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    min-height: 0;
+
+}
+
+/* ==========================================================
+   BELL ANIMATION
+========================================================== */
+
+.shake {
+
+    animation: bellShake 1s infinite;
+
+}
+
+@keyframes bellShake {
+
+    0% {
+
+        transform: rotate(0deg);
+
+    }
+
+    20% {
+
+        transform: rotate(15deg);
+
+    }
+
+    40% {
+
+        transform: rotate(-15deg);
+
+    }
+
+    60% {
+
+        transform: rotate(10deg);
+
+    }
+
+    80% {
+
+        transform: rotate(-10deg);
+
+    }
+
+    100% {
+
+        transform: rotate(0deg);
+
+    }
+
+}
+/* ==========================================================
+   RESPONSIVE DESIGN
+========================================================== */
+
+@media screen and (max-width: 1200px) {
+
+    .sidebar {
+
+        width: 240px;
+
+        min-width: 240px;
+
+    }
+
+    .top-header {
+
+        padding: 20px;
+
+    }
+
+    .header-left h1 {
+
+        font-size: 24px;
+        font-family: 'Times New Roman', Times, serif;
+
+    }
+
+}
+
+/* ==========================================================
+   TABLET VIEW
+========================================================== */
+
+@media screen and (max-width: 992px) {
+
+    .dashboard-container {
+
+        flex-direction: column;
+
+    }
+
+    .sidebar {
+
+        width: 100%;
+
+        min-width: 100%;
+
+        padding: 18px;
+
+    }
+
+    .menu {
+
+        flex-direction: row;
+
+        flex-wrap: wrap;
+
+        justify-content: center;
+
+    }
+
+    .menu a {
+
+        flex: 1 1 180px;
+
+        justify-content: center;
+
+    }
+
+    .logout-btn {
+
+        margin-top: 20px;
+
+    }
+
+    .main-content {
+
+        padding: 20px;
+
+    }
+
+}
+
+/* ==========================================================
+   MOBILE VIEW
+========================================================== */
+
+@media screen and (max-width: 768px) {
+
+    .top-header {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 20px;
+
+    }
+
+    .header-right {
+
+        width: 100%;
+
+        justify-content: space-between;
+
+    }
+
+    .notification-dropdown {
+
+        width: 100%;
+
+        right: 0;
+
+        left: 0;
+
+    }
+
+    .user-info {
+
+        text-align: left;
+
+    }
+
+}
+
+/* ==========================================================
+   SMALL MOBILE VIEW
+========================================================== */
+
+@media screen and (max-width: 576px) {
+
+    .main-content {
+
+        padding: 15px;
+
+    }
+
+    .logo {
+
+        width: 75px;
+
+        height: 75px;
+
+    }
+
+    .logo-section h2 {
+
+        font-size: 18px;
+        font-family: 'Times New Roman', Times, serif;
+
+    }
+
+    .logo-section p {
+
+        font-size: 12px;
+        font-family: 'Times New Roman', Times, serif;
+
+    }
+
+    .header-left h1 {
+
+        font-size: 20px;
+        font-family: 'Times New Roman', Times, serif;
+
+    }
+
+    .header-left p {
+
+        font-size: 13px;
+        font-family: 'Times New Roman', Times, serif;
+
+    }
+
+    .menu {
+
+        gap: 8px;
+
+    }
+
+    .menu a {
+
+        font-size: 14px;
+      font-family: 'Times New Roman', Times, serif;
+        padding: 12px;
+
+    }
+
+    .notification-bell {
+
+        width: 42px;
+
+        height: 42px;
+
+    }
+
+    .bell-icon {
+
+        font-size: 20px;
+        font-family: 'Times New Roman', Times, serif;
+
+    }
+
+    .notification-count {
+
+        width: 20px;
+
+        height: 20px;
+
+        font-size: 11px;
+        font-family: 'Times New Roman', Times, serif;
+
+    }
+
+    .notification-dropdown {
+
+        max-height: 350px;
+
+    }
+
+}
+
+/* ==========================================================
+   SCROLLBAR STYLING
+========================================================== */
+
+.notification-dropdown::-webkit-scrollbar {
+
+    width: 6px;
+
+}
+
+.notification-dropdown::-webkit-scrollbar-track {
+
+    background: #f1f1f1;
+
+    border-radius: 10px;
+
+}
+
+.notification-dropdown::-webkit-scrollbar-thumb {
+
+    background: #1565C0;
+
+    border-radius: 10px;
+
+}
+
+.notification-dropdown::-webkit-scrollbar-thumb:hover {
+
+    background: #0A2F73;
+
+}
+
+/* ==========================================================
+   SMOOTH TRANSITIONS
+========================================================== */
+
+* {
+
+    box-sizing: border-box;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+
+}
+/*=========================================================
+                    ADMIN PROFILE
+=========================================================*/
+
+.admin-profile{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    background:#ffffff;
+
+    padding:12px 18px;
+
+    border-radius:18px;
+
+    box-shadow:0 8px 18px rgba(0,0,0,.08);
+
+}
+
+.admin-avatar{
+
+    width:55px;
+
+    height:55px;
+
+    border-radius:50%;
+
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+
+    color:#fff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:24px;
+    font-family: 'Times New Roman', Times, serif;
+
+}
+
+.admin-details h3{
+
+    font-size:18px;
+    font-family: 'Times New Roman', Times, serif;
+
+    color:#1e293b;
+
+    margin-bottom:4px;
+
+}
+
+.admin-details span{
+
+    color:#64748b;
+
+    font-size:13px;
+    font-family: 'Times New Roman', Times, serif;
+
+}
